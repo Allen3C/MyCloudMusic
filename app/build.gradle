@@ -33,11 +33,17 @@ android {
 }
 
 dependencies {
+    //添加所有libs目录里面的jar包
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    //添加appcompat包
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    //引用constraintlayout依赖
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    //Java测试依赖
     testImplementation 'junit:junit:4.12'
+    //Android测试依赖
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //OKHttp依赖
+    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
 }
