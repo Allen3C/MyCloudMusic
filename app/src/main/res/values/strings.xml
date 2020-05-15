@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MyCloudMusic</string>
+    <string name="copyright">版权以后改</string>
+    <string name="login_or_register">登录/注册</string>
+    <string name="lijitiyan">立即体验</string>
 </resources>

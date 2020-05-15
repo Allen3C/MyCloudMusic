@@ -18,6 +18,7 @@ buildscript {
 
 allprojects {
     repositories {
+        //google的maven仓库，类似jitpack
         google()
         jcenter()
         

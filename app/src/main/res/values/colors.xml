@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <!--状态栏颜色-->
+    <color name="colorPrimary">#dd0000</color>
+    <!--标题栏颜色-->
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+
+    <!--常用颜色-->
+    <color name="white">@android:color/white</color>
+    <!--亮一点的灰色-->
+    <color name="light_grey">#aaaaaa</color>
+    <!--全局背景-->
+    <color name="background">@color/white</color>
 </resources>
