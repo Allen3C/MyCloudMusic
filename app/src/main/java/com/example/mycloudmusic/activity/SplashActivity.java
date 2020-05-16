@@ -42,6 +42,13 @@ public class SplashActivity extends BaseCommonActivity {
 
     private void next() {
         startActivityAfterFinnishThis(GuideActivity.class);
+//        if(sp.isShowGuide()){
+//            //跳转引导界面
+//            startActivityAfterFinnishThis(GuideActivity.class);
+//        }else{
+//            //跳转登录注册界面
+//            startActivityAfterFinnishThis(LoginOrRegisterActivity.class);
+//        }
     }
 
     @Override
