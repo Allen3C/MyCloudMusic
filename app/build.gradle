@@ -2,6 +2,12 @@
 apply plugin: 'com.android.application'
 
 android {
+    //将源码兼容版本设置为Java 8
+    //因为Butterknife需要Java 8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     //编译版本
     compileSdkVersion rootProject.ext.compileSdkVersion
     //编译工具版本
@@ -49,4 +55,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'
     //圆形指示器
     implementation 'me.relex:circleindicator:2.1.4'
+    //butterknife
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    //material design依赖
+    implementation 'com.google.android.material:material:1.0.0'
 }

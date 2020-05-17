@@ -8,6 +8,9 @@
 
     <!--常用颜色-->
     <color name="white">@android:color/white</color>
+    <!--透明颜色-->
+    <color name="transparent">@android:color/transparent</color>
+
     <!--亮一点的灰色-->
     <color name="light_grey">#aaaaaa</color>
     <!--全局背景-->

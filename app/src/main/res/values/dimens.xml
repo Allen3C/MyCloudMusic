@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Activity边距-->
+    <dimen name="activity_margin">16dp</dimen>
     <!--小文本-->
     <dimen name="text_small">12sp</dimen>
+    <!--中间隙-->
+    <dimen name="padding_middle">10dp</dimen>
     <!--大间隙-->
     <dimen name="padding_large">20dp</dimen>
     <!--按钮相关-->
@@ -15,4 +19,5 @@
     <dimen name="guide_indicator_height">40dp</dimen>
     <!--登录注册相关-->
     <dimen name="login_logo_height_or_width">80dp</dimen>
+
 </resources>
