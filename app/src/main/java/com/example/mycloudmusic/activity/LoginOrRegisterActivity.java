@@ -27,6 +27,9 @@ public class LoginOrRegisterActivity extends BaseCommonActivity implements View.
     @Override
     protected void initViews() {
         super.initViews();
+        //内容显示到状态栏下面
+        lightStatusBar();
+
         bt_login = findViewById(R.id.bt_login);
         bt_register = findViewById(R.id.bt_register);
     }
