@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--layer-list:也是一种drawable
+类似ps中的图层-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--一个Item就是一层
+    top:指定这一边到控件这一面的间距
+    0dp：表示和原来一样
+    正数：就是边框变小
+    负数：边框显示到控件外面（从而达到隐藏效果）
+    -->
+    <item android:left="-1dp"
+        android:right="-1dp"
+        android:top="-1dp">
+        <!--在一个Item中定义一个shape
+    也可以定义多个,shape默认是矩形-->
+        <shape>
+            <!--填充颜色为透明-->
+            <solid android:color="@color/transparent"/>
+            <!--边框为灰色-->
+            <stroke android:width="@dimen/divider_small"
+                android:color="@color/light_grey"/>
+        </shape>
+    </item>
+
+</layer-list>
