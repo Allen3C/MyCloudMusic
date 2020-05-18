@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.util.LogUtil;
+import com.example.mycloudmusic.util.StringUtil;
 import com.example.mycloudmusic.util.ToastUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -44,19 +45,31 @@ public class LoginActivity extends BaseTitleActivity {
         if(StringUtils.isBlank(username)){
             LogUtil.w(TAG, "onLoginClick username empty");
 //            Toast.makeText(getMainActivity(), R.string.enter_username, Toast.LENGTH_SHORT).show();
-            ToastUtil.errorShortToast(getMainActivity(), R.string.enter_username);
+            ToastUtil.errorShortToast(R.string.enter_username);
             return;
         }
-        //获取用户名
+        //如果用户名
+        //不是手机号也不是邮箱
+        //就是格式错误
+        if(!(StringUtil.isPhone(username) || StringUtil.isEmail(username))){
+            ToastUtil.errorShortToast( R.string.error_username_format);
+            return;
+        }
+        //获取密码
         String password = et_password.getText().toString().trim();
         if(StringUtils.isBlank(password)){
             LogUtil.w(TAG, "onLoginClick password empty");
 //            Toast.makeText(getMainActivity(), R.string.enter_password, Toast.LENGTH_SHORT).show();
-            ToastUtil.errorShortToast(getMainActivity(), R.string.enter_password);
+            ToastUtil.errorShortToast( R.string.enter_password);
+            return;
+        }
+        //判断密码格式
+        if(!(StringUtil.isPassword(password))){
+            ToastUtil.errorShortToast(R.string.error_password_format);
             return;
         }
         // TODO: 20-5-18 调用登录方法
-        ToastUtil.successShortToast(getMainActivity(), R.string.login_success);
+        ToastUtil.successShortToast(R.string.login_success);
     }
     /**
      * 忘记密码按钮点击了
