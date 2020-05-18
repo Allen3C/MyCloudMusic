@@ -46,7 +46,6 @@ dependencies {
     //引用constraintlayout依赖
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     //Java测试依赖
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     //Android测试依赖
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -60,4 +59,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     //material design依赖
     implementation 'com.google.android.material:material:1.0.0'
+    //apache common lang3工具包
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    //toast工具类
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
 }
