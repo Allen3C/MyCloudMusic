@@ -1,9 +1,17 @@
 package com.example.mycloudmusic.util;
 
+import android.os.Build;
+
+import com.example.mycloudmusic.BuildConfig;
+
 /**
  * 常量类
  */
 public class Constant {
+    /**
+     * 资源端点
+     */
+    public static final String ENDPOINT = BuildConfig.ENDPOINT;
     /**
      * ID常量
      * 用作键值

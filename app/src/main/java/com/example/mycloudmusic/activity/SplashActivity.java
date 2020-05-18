@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.util.Constant;
+import com.example.mycloudmusic.util.LogUtil;
 
 /**
  * 启动界面
@@ -73,5 +75,8 @@ public class SplashActivity extends BaseCommonActivity {
     @Override
     protected void initDatum() {
         super.initDatum();
+        //测试productFlavors
+        //获取ENDPOINT常量
+        LogUtil.d(TAG, "initDatum:" + Constant.ENDPOINT);
     }
 }
