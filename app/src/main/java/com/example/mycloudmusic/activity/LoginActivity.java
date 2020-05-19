@@ -17,6 +17,7 @@ import com.example.mycloudmusic.listener.ObserverAdapter;
 import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.network.Service;
 import com.example.mycloudmusic.util.Constant;
+import com.example.mycloudmusic.util.HttpUtil;
 import com.example.mycloudmusic.util.LoadingUtil;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.StringUtil;
@@ -291,8 +292,11 @@ public class LoginActivity extends BaseTitleActivity {
             }
 
             @Override
-            public boolean onFailed(DetailResponse<User> userDetailResponse, Throwable e) {
+            public boolean onFailed(DetailResponse<User> data, Throwable e) {
                 LogUtil.d(TAG, "onFailed:" + e);
+
+                //调用工具类处理错误
+                HttpUtil.handlerRequest(data, e);
 
                 //返回true表示手动处理错误
                 return true;
