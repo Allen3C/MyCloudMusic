@@ -6,8 +6,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
+import com.example.mycloudmusic.domain.response.DetailResponse;
+import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.network.Service;
 import com.example.mycloudmusic.util.Constant;
@@ -178,32 +181,78 @@ public class LoginActivity extends BaseTitleActivity {
 //            }
 //        }, 3000);
 
-        //请求歌单列表数据
-        //请求歌单列表
-        Api.getInstance().sheets()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SheetListWrapper>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+//        //请求歌单列表数据
+//        //请求歌单列表
+//        Api.getInstance().sheets()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<SheetListWrapper>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(SheetListWrapper sheetWrapper) {
+//                        LogUtil.d(TAG,"onNext:"+sheetWrapper.getData().size());
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
-                    }
+//        //使用DetailResponse
+//        Api.getInstance().sheetDetail("1").subscribe(new Observer<DetailResponse<Sheet>>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(DetailResponse<Sheet> sheetDetailResponse) {
+//                LogUtil.d(TAG, "request sheet detail success:" + sheetDetailResponse.getData().getTitle());
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
 
-                    @Override
-                    public void onNext(SheetListWrapper sheetWrapper) {
-                        LogUtil.d(TAG,"onNext:"+sheetWrapper.getData().size());
-                    }
+        //使用ListResponse
+        Api.getInstance().sheets().subscribe(new Observer<ListResponse<Sheet>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-                    @Override
-                    public void onError(Throwable e) {
+            }
 
-                    }
+            @Override
+            public void onNext(ListResponse<Sheet> sheetListResponse) {
+                LogUtil.d(TAG,"onNext:"+sheetListResponse.getData().size());
+            }
 
-                    @Override
-                    public void onComplete() {
+            @Override
+            public void onError(Throwable e) {
 
-                    }
-                });
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
 
 //        //获取用户名
 //        String username = et_username.getText().toString().trim();

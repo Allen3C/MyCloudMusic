@@ -7,7 +7,7 @@ package com.example.mycloudmusic.domain;
  */
 public class SheetDetailWrapper {
     /**
-     * 歌单对象
+     * 一个歌单对象
      */
     private Sheet data;
 

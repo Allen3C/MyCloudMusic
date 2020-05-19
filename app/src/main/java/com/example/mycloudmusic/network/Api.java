@@ -1,7 +1,10 @@
 package com.example.mycloudmusic.network;
 
+import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
+import com.example.mycloudmusic.domain.response.DetailResponse;
+import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.util.Constant;
 
 import io.reactivex.Observable;
@@ -77,7 +80,7 @@ public class Api {
      *
      * @return
      */
-    public Observable<SheetListWrapper> sheets() {
+    public Observable<ListResponse<Sheet>> sheets() {
         return service.sheets()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -89,7 +92,7 @@ public class Api {
      * @param id
      * @return
      */
-    public Observable<SheetDetailWrapper> sheetDetail(String id) {
+    public Observable<DetailResponse<Sheet>> sheetDetail(String id) {
         return service.sheetDetail(id)
                 //这两个是固定写法
                 //在子线程执行
