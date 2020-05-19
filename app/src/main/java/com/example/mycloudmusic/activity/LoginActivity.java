@@ -11,6 +11,8 @@ import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
+import com.example.mycloudmusic.listener.HttpObserver;
+import com.example.mycloudmusic.listener.ObserverAdapter;
 import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.network.Service;
 import com.example.mycloudmusic.util.Constant;
@@ -231,26 +233,43 @@ public class LoginActivity extends BaseTitleActivity {
 //            }
 //        });
 
-        //使用ListResponse
-        Api.getInstance().sheets().subscribe(new Observer<ListResponse<Sheet>>() {
+//        //使用ListResponse
+//        Api.getInstance().sheets().subscribe(new Observer<ListResponse<Sheet>>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(ListResponse<Sheet> sheetListResponse) {
+//                LogUtil.d(TAG,"onNext:"+sheetListResponse.getData().size());
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
+
+//        //使用ObserverAdapter
+//        Api.getInstance().sheetDetail("1").subscribe(new ObserverAdapter<DetailResponse<Sheet>>(){
+//            @Override
+//            public void onNext(DetailResponse<Sheet> sheetDetailResponse) {
+//                super.onNext(sheetDetailResponse);
+//                LogUtil.d(TAG, "request sheet detail success:" + sheetDetailResponse.getData().getTitle());
+//            }
+//        });
+
+        //使用HttpObserver
+        Api.getInstance().sheetDetail("1").subscribe(new HttpObserver<DetailResponse<Sheet>>() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(ListResponse<Sheet> sheetListResponse) {
-                LogUtil.d(TAG,"onNext:"+sheetListResponse.getData().size());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
+            public void onSucceeded(DetailResponse<Sheet> data) {
+                LogUtil.d(TAG, "request sheet detail success:" + data.getData().getTitle());
             }
         });
 
