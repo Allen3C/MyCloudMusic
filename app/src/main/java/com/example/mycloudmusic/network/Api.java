@@ -3,9 +3,14 @@ package com.example.mycloudmusic.network;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
+import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.util.Constant;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -94,6 +99,27 @@ public class Api {
      */
     public Observable<DetailResponse<Sheet>> sheetDetail(String id) {
         return service.sheetDetail(id)
+                //这两个是固定写法
+                //在子线程执行
+                .subscribeOn(Schedulers.io())
+                //在主线程观察
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 歌单详情
+     *
+     * @param id
+     * @return
+     */
+    public Observable<DetailResponse<User>> userDetail(String id, String nickname) {
+        //添加查询参数
+        HashMap<String, String> data = new HashMap<>();
+        //如果昵称不为空才添加
+        if(StringUtils.isNotBlank(nickname)){
+            data.put(Constant.NICKNAME, nickname);
+        }
+        return service.userDetail(id, data)
                 //这两个是固定写法
                 //在子线程执行
                 .subscribeOn(Schedulers.io())

@@ -9,6 +9,7 @@ import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
+import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
@@ -272,6 +273,14 @@ public class LoginActivity extends BaseTitleActivity {
                 LogUtil.d(TAG, "request sheet detail success:" + data.getData().getTitle());
             }
         });
+
+//        //模拟500错误
+//        Api.getInstance().userDetail("-1", "11111").subscribe(new HttpObserver<DetailResponse<User>>() {
+//            @Override
+//            public void onSucceeded(DetailResponse<User> data) {
+//                LogUtil.d(TAG, "onNext:" + data.getData());
+//            }
+//        });
 
 //        //获取用户名
 //        String username = et_username.getText().toString().trim();
