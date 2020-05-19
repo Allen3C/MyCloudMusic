@@ -7,6 +7,7 @@ import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.util.Constant;
+import com.example.mycloudmusic.util.LogUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,6 +17,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -41,6 +43,19 @@ public class Api {
     private Api() {
         //初始化okhttp
         OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+
+        if (LogUtil.isDebug) {
+            //调试模式
+
+            //创建OKHttp日志拦截器
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+
+            //设置日志等级
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+
+            //添加到网络框架中
+            okhttpClientBuilder.addInterceptor(interceptor);
+        }
 
         //初始化retrofit
         Retrofit retrofit = new Retrofit.Builder()
