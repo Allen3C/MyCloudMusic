@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
+import com.example.mycloudmusic.domain.SheetListWrapper;
 import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.network.Service;
 import com.example.mycloudmusic.util.Constant;
@@ -136,35 +137,35 @@ public class LoginActivity extends BaseTitleActivity {
 //                    }
 //                });
 
-        //使用重构后的API
-        Api.getInstance()
-                .sheetDetail("1")
-                .subscribe(new Observer<SheetDetailWrapper>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        //显示加载提示框
-                        LoadingUtil.showLoading(getMainActivity());
-                    }
-
-                    @Override
-                    public void onNext(SheetDetailWrapper sheetDetailWrapper) {
-                        LogUtil.d(TAG, "request sheet detail success:" + sheetDetailWrapper.getData().getTitle());
-                        //隐藏加载提示框
-                        LoadingUtil.hideLoading();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.d(TAG, "request sheet detail failed:" + e.getLocalizedMessage());
-                        //隐藏加载提示框
-                        LoadingUtil.hideLoading();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        //使用重构后的API
+//        Api.getInstance()
+//                .sheetDetail("1")
+//                .subscribe(new Observer<SheetDetailWrapper>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        //显示加载提示框
+//                        LoadingUtil.showLoading(getMainActivity());
+//                    }
+//
+//                    @Override
+//                    public void onNext(SheetDetailWrapper sheetDetailWrapper) {
+//                        LogUtil.d(TAG, "request sheet detail success:" + sheetDetailWrapper.getData().getTitle());
+//                        //隐藏加载提示框
+//                        LoadingUtil.hideLoading();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        LogUtil.d(TAG, "request sheet detail failed:" + e.getLocalizedMessage());
+//                        //隐藏加载提示框
+//                        LoadingUtil.hideLoading();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
 //        //测试加载提示框
 //        LoadingUtil.showLoading(getMainActivity());
@@ -176,6 +177,33 @@ public class LoginActivity extends BaseTitleActivity {
 //                LoadingUtil.hideLoading();
 //            }
 //        }, 3000);
+
+        //请求歌单列表数据
+        //请求歌单列表
+        Api.getInstance().sheets()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SheetListWrapper>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(SheetListWrapper sheetWrapper) {
+                        LogUtil.d(TAG,"onNext:"+sheetWrapper.getData().size());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
 //        //获取用户名
 //        String username = et_username.getText().toString().trim();

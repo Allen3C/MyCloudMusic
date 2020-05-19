@@ -1,6 +1,7 @@
 package com.example.mycloudmusic.network;
 
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
+import com.example.mycloudmusic.domain.SheetListWrapper;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -13,6 +14,15 @@ import retrofit2.http.Path;
  * 是因为Retrofit框架内部处理了
  */
 public interface Service {
+
+    /**
+     * 歌单列表
+     * Observable 是固定写法，因为用了RxJava
+     * @return
+     */
+    @GET("v1/sheets")
+    Observable<SheetListWrapper> sheets();
+
     /**
      * 歌单详情
      *
