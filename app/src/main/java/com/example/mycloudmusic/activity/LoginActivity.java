@@ -283,26 +283,15 @@ public class LoginActivity extends BaseTitleActivity {
 //            }
 //        });
 
-        //模拟500错误
-        //手动处理错误
-        Api.getInstance().userDetail("-1", "11111").subscribe(new HttpObserver<DetailResponse<User>>() {
+//
+
+        //测试自动显示隐藏对话框
+        Api.getInstance().sheetDetail("1").subscribe(new HttpObserver<DetailResponse<Sheet>>(getMainActivity(), true) {
             @Override
-            public void onSucceeded(DetailResponse<User> data) {
-                LogUtil.d(TAG, "onNext:" + data.getData());
-            }
-
-            @Override
-            public boolean onFailed(DetailResponse<User> data, Throwable e) {
-                LogUtil.d(TAG, "onFailed:" + e);
-
-                //调用工具类处理错误
-                HttpUtil.handlerRequest(data, e);
-
-                //返回true表示手动处理错误
-                return true;
+            public void onSucceeded(DetailResponse<Sheet> data) {
+                LogUtil.d(TAG, "onNext:" + data.getData().getTitle());
             }
         });
-
 
 //        //获取用户名
 //        String username = et_username.getText().toString().trim();

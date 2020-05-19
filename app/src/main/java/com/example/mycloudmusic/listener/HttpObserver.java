@@ -1,14 +1,35 @@
 package com.example.mycloudmusic.listener;
 
+import com.example.mycloudmusic.activity.BaseCommonActivity;
 import com.example.mycloudmusic.domain.response.BaseResponse;
 import com.example.mycloudmusic.util.HttpUtil;
+import com.example.mycloudmusic.util.LoadingUtil;
 import com.example.mycloudmusic.util.LogUtil;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * 网络请求Observer
  */
 public abstract class HttpObserver<T> extends ObserverAdapter<T> {
     private static final String TAG = "HttpObserver";
+    private boolean isShowLoading;
+    private BaseCommonActivity activity;
+
+    /**
+     * 无参构造
+     */
+    public HttpObserver(){
+
+    }
+
+    /**
+     *有参构造
+     */
+    public HttpObserver(BaseCommonActivity activity, boolean isShowLoading){
+        this.activity = activity;
+        this.isShowLoading = isShowLoading;
+    }
 
     /**
      * 请求成功
@@ -29,9 +50,21 @@ public abstract class HttpObserver<T> extends ObserverAdapter<T> {
     }
 
     @Override
+    public void onSubscribe(Disposable d) {
+        super.onSubscribe(d);
+        if(isShowLoading){
+            //显示加载对话框
+            LoadingUtil.showLoading(activity);
+        }
+    }
+
+    @Override
     public void onNext(T t) {
         super.onNext(t);
         LogUtil.d(TAG, "onNext:" + t);
+
+        //检查是否需要隐藏对话框
+        checkHideLoading();
 
         if (isSucceeded(t)) {
             //请求正常
@@ -42,11 +75,13 @@ public abstract class HttpObserver<T> extends ObserverAdapter<T> {
         }
     }
 
-
     @Override
     public void onError(Throwable e) {
         super.onError(e);
         LogUtil.d(TAG, "onError:" + e.getLocalizedMessage());
+
+        //检查是否需要隐藏对话框
+        checkHideLoading();
 
         //处理错误
         handlerRequest(null, e);
@@ -84,6 +119,15 @@ public abstract class HttpObserver<T> extends ObserverAdapter<T> {
         }else {
             //返回false就在框架处理
             HttpUtil.handlerRequest(data, error);
+        }
+    }
+
+    /**
+     * 检查是否需要隐藏对话框
+     */
+    protected void checkHideLoading(){
+        if(isShowLoading){
+            LoadingUtil.hideLoading();
         }
     }
 }
