@@ -266,13 +266,13 @@ public class LoginActivity extends BaseTitleActivity {
 //            }
 //        });
 
-        //使用HttpObserver
-        Api.getInstance().sheetDetail("1").subscribe(new HttpObserver<DetailResponse<Sheet>>() {
-            @Override
-            public void onSucceeded(DetailResponse<Sheet> data) {
-                LogUtil.d(TAG, "request sheet detail success:" + data.getData().getTitle());
-            }
-        });
+//        //使用HttpObserver
+//        Api.getInstance().sheetDetail("1").subscribe(new HttpObserver<DetailResponse<Sheet>>() {
+//            @Override
+//            public void onSucceeded(DetailResponse<Sheet> data) {
+//                LogUtil.d(TAG, "request sheet detail success:" + data.getData().getTitle());
+//            }
+//        });
 
 //        //模拟500错误
 //        Api.getInstance().userDetail("-1", "11111").subscribe(new HttpObserver<DetailResponse<User>>() {
@@ -281,6 +281,24 @@ public class LoginActivity extends BaseTitleActivity {
 //                LogUtil.d(TAG, "onNext:" + data.getData());
 //            }
 //        });
+
+        //模拟500错误
+        //手动处理错误
+        Api.getInstance().userDetail("-1", "11111").subscribe(new HttpObserver<DetailResponse<User>>() {
+            @Override
+            public void onSucceeded(DetailResponse<User> data) {
+                LogUtil.d(TAG, "onNext:" + data.getData());
+            }
+
+            @Override
+            public boolean onFailed(DetailResponse<User> userDetailResponse, Throwable e) {
+                LogUtil.d(TAG, "onFailed:" + e);
+
+                //返回true表示手动处理错误
+                return true;
+            }
+        });
+
 
 //        //获取用户名
 //        String username = et_username.getText().toString().trim();
