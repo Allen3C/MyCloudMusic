@@ -136,41 +136,47 @@ public class LoginActivity extends BaseTitleActivity {
 //                    }
 //                });
 
-//        //使用重构后的API
-//        Api.getInstance()
-//                .sheetDetail("1")
-//                .subscribe(new Observer<SheetDetailWrapper>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(SheetDetailWrapper sheetDetailWrapper) {
-//                        LogUtil.d(TAG, "request sheet detail success:" + sheetDetailWrapper.getData().getTitle());
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        LogUtil.d(TAG, "request sheet detail failed:" + e.getLocalizedMessage());
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
+        //使用重构后的API
+        Api.getInstance()
+                .sheetDetail("1")
+                .subscribe(new Observer<SheetDetailWrapper>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        //显示加载提示框
+                        LoadingUtil.showLoading(getMainActivity());
+                    }
 
-            //测试加载提示框
-        LoadingUtil.showLoading(getMainActivity());
-        //3秒后自动隐藏
-//因为显示后无法点击后面的按钮
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LoadingUtil.hideLoading();
-            }
-        }, 3000);
+                    @Override
+                    public void onNext(SheetDetailWrapper sheetDetailWrapper) {
+                        LogUtil.d(TAG, "request sheet detail success:" + sheetDetailWrapper.getData().getTitle());
+                        //隐藏加载提示框
+                        LoadingUtil.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.d(TAG, "request sheet detail failed:" + e.getLocalizedMessage());
+                        //隐藏加载提示框
+                        LoadingUtil.hideLoading();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+//        //测试加载提示框
+//        LoadingUtil.showLoading(getMainActivity());
+//        //3秒后自动隐藏
+//        //因为显示后无法点击后面的按钮
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                LoadingUtil.hideLoading();
+//            }
+//        }, 3000);
+
 //        //获取用户名
 //        String username = et_username.getText().toString().trim();
 //        if(StringUtils.isBlank(username)){
