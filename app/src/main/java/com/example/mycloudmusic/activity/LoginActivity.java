@@ -1,6 +1,7 @@
 package com.example.mycloudmusic.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -9,6 +10,7 @@ import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.network.Service;
 import com.example.mycloudmusic.util.Constant;
+import com.example.mycloudmusic.util.LoadingUtil;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.StringUtil;
 import com.example.mycloudmusic.util.ToastUtil;
@@ -133,31 +135,42 @@ public class LoginActivity extends BaseTitleActivity {
 //
 //                    }
 //                });
-        //使用重构后的API
-        Api.getInstance()
-                .sheetDetail("1")
-                .subscribe(new Observer<SheetDetailWrapper>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
 
-                    }
+//        //使用重构后的API
+//        Api.getInstance()
+//                .sheetDetail("1")
+//                .subscribe(new Observer<SheetDetailWrapper>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(SheetDetailWrapper sheetDetailWrapper) {
+//                        LogUtil.d(TAG, "request sheet detail success:" + sheetDetailWrapper.getData().getTitle());
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        LogUtil.d(TAG, "request sheet detail failed:" + e.getLocalizedMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
-                    @Override
-                    public void onNext(SheetDetailWrapper sheetDetailWrapper) {
-                        LogUtil.d(TAG, "request sheet detail success:" + sheetDetailWrapper.getData().getTitle());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.d(TAG, "request sheet detail failed:" + e.getLocalizedMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
+            //测试加载提示框
+        LoadingUtil.showLoading(getMainActivity());
+        //3秒后自动隐藏
+//因为显示后无法点击后面的按钮
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LoadingUtil.hideLoading();
+            }
+        }, 3000);
 //        //获取用户名
 //        String username = et_username.getText().toString().trim();
 //        if(StringUtils.isBlank(username)){
