@@ -14,6 +14,10 @@ import com.example.mycloudmusic.util.ToastUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observer;
@@ -21,6 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -94,6 +99,32 @@ public class LoginActivity extends BaseTitleActivity {
                     public void onError(Throwable e) {
                         //请求失败
                         LogUtil.d(TAG,"request sheet detail failed:"+e.getLocalizedMessage());
+
+                        //判断错误类型
+                        if (e instanceof UnknownHostException) {
+                            ToastUtil.errorShortToast(R.string.error_network_unknown_host);
+                        }else if (e instanceof ConnectException) {
+                            ToastUtil.errorShortToast(R.string.error_network_connect);
+                        }else if(e instanceof SocketTimeoutException){
+                            ToastUtil.errorShortToast(R.string.error_network_timeout);
+                        }else if (e instanceof HttpException){
+                            HttpException exception = (HttpException) e;
+                            //获取响应码
+                            int code = exception.code();
+                            if (code == 401) {
+                                ToastUtil.errorShortToast(R.string.error_network_not_auth);
+                            } else if (code == 403) {
+                                ToastUtil.errorShortToast(R.string.error_network_not_permission);
+                            } else if (code == 404) {
+                                ToastUtil.errorShortToast(R.string.error_network_not_found);
+                            } else if (code >= 500) {
+                                ToastUtil.errorShortToast(R.string.error_network_server);
+                            } else {
+                                ToastUtil.errorShortToast(R.string.error_network_unknown);
+                            }
+                        } else{
+                            ToastUtil.errorShortToast(R.string.error_network_unknown);
+                        }
                     }
 
                     @Override
