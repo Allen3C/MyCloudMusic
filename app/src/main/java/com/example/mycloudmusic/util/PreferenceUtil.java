@@ -54,7 +54,7 @@ public class PreferenceUtil {
      * 设置是否显示引导界面
      */
     public void setShowGuide(boolean value){
-        sharedPreferences.edit().putBoolean(SHOW_GUIDE, value).commit();
+        putBoolean(SHOW_GUIDE, value);
     }
 
     /**
@@ -62,7 +62,7 @@ public class PreferenceUtil {
      * @param value
      */
     public void setSession(String value) {
-        sharedPreferences.edit().putString(SESSION, value).commit();
+        putString(SESSION, value);
     }
 
     /**
@@ -78,7 +78,7 @@ public class PreferenceUtil {
      * @param value
      */
     public void setUserId(String value) {
-        sharedPreferences.edit().putString(USER_ID, value).commit();
+        putString(USER_ID, value);
     }
 
     /**
@@ -88,4 +88,23 @@ public class PreferenceUtil {
     public String getUserId(){
         return sharedPreferences.getString(USER_ID, null);
     }
+
+    //辅助方法
+    /**
+     * 保存字符串
+     * @param key
+     * @param value
+     */
+    private void putString(String key, String value) {
+        sharedPreferences.edit().putString(key, value).commit();
+    }
+    /**
+     * 保存boolean
+     * @param key
+     * @param value
+     */
+    private void putBoolean(String key, boolean value) {
+        sharedPreferences.edit().putBoolean(key, value).commit();
+    }
+    //end 辅助方法
 }
