@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.example.mycloudmusic.AppContext;
+import com.example.mycloudmusic.MainActivity;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.BaseModel;
+import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
@@ -124,9 +127,40 @@ public class RegisterActivity extends BaseTitleActivity {
                 LogUtil.d(TAG, "register success:" + data.getData().getId());
 
                 //自动登录
+                login(phone, email, password);
             }
         });
+    }
 
+    /**
+     * 登录
+     * @param phone
+     * @param email
+     * @param password
+     */
+    public void login(String phone, String email, String password){
+        User user = new User();
+        //这里虽然同时传递了手机号和邮箱
+        //但服务端登录的时候有先后顺序
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setPassword(password);
+        //调用登录接口
+        Api.getInstance()
+                .login(user)
+                .subscribe(new HttpObserver<DetailResponse<Session>>() {
+                    @Override
+                    public void onSucceeded(DetailResponse<Session> data) {
+                        LogUtil.d(TAG,"onLoginClick success:"+data.getData().getSession());
 
+                        //把登录成功的事件通知到AppContext
+                        AppContext.getInstance().login(sp, data.getData());
+
+                        ToastUtil.successShortToast(R.string.login_success);
+
+                        //关闭当前界面并启动主界面
+                        startActivityAfterFinnishThis(MainActivity.class);
+                    }
+                });
     }
 }

@@ -309,6 +309,7 @@ public class LoginActivity extends BaseTitleActivity {
         }else {
             email = username;
         }
+
         User user = new User();
         //这里虽然同时传递了手机号和邮箱
         //但服务端登录的时候有先后顺序
