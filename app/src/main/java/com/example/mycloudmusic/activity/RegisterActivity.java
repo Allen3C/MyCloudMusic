@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.domain.BaseModel;
+import com.example.mycloudmusic.domain.User;
+import com.example.mycloudmusic.domain.response.DetailResponse;
+import com.example.mycloudmusic.listener.HttpObserver;
+import com.example.mycloudmusic.network.Api;
+import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.StringUtil;
 import com.example.mycloudmusic.util.ToastUtil;
 
@@ -19,6 +25,7 @@ import butterknife.OnClick;
  */
 public class RegisterActivity extends BaseTitleActivity {
 
+    private static final String TAG = "RegisterActivity";
     @BindView(R.id.et_nickname)
     EditText et_nickname;
     @BindView(R.id.et_phone)
@@ -45,7 +52,7 @@ public class RegisterActivity extends BaseTitleActivity {
             return;
         }
         //判断昵称格式
-        if(StringUtil.isNickname(nickname)){
+        if(!StringUtil.isNickname(nickname)){
             ToastUtil.errorShortToast(R.string.error_nickname_format);
         }
 
@@ -101,5 +108,25 @@ public class RegisterActivity extends BaseTitleActivity {
             ToastUtil.errorShortToast(R.string.error_confirm_password);
             return;
         }
+
+        //调用注册接口完成用户注册
+
+        User user = new User();
+        //将信息设置到对象上
+        user.setNickname(nickname);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setPassword(password);
+        //调用注册接口
+        Api.getInstance().register(user).subscribe(new HttpObserver<DetailResponse<BaseModel>>() {
+            @Override
+            public void onSucceeded(DetailResponse<BaseModel> data) {
+                LogUtil.d(TAG, "register success:" + data.getData().getId());
+
+                //自动登录
+            }
+        });
+
+
     }
 }

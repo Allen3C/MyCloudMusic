@@ -6,6 +6,10 @@ package com.example.mycloudmusic.domain;
 public class User extends BaseModel {
 
     /**
+     * 昵称
+     */
+    private String nickname;
+    /**
      * 手机号
      */
     private String phone;
@@ -44,6 +48,15 @@ public class User extends BaseModel {
 
     public User setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public User setNickname(String nickname) {
+        this.nickname = nickname;
         return this;
     }
 }
