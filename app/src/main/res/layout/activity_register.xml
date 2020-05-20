@@ -20,12 +20,14 @@
 
         <!--昵称输入框-->
         <EditText
+            android:id="@+id/et_nickname"
             style="@style/EditText"
             android:hint="@string/enter_nickname"
             android:maxLength="10" />
 
         <!--手机号输入框-->
         <EditText
+            android:id="@+id/et_phone"
             style="@style/EditText"
             android:hint="@string/enter_phone"
             android:maxLength="11"
@@ -33,12 +35,14 @@
 
         <!--邮箱输入框-->
         <EditText
+            android:id="@+id/et_email"
             style="@style/EditText"
             android:hint="@string/enter_email"
             android:inputType="textEmailAddress" />
 
         <!--密码输入框-->
         <EditText
+            android:id="@+id/et_password"
             style="@style/EditText"
             android:hint="@string/enter_password"
             android:maxLength="15"
@@ -46,6 +50,7 @@
 
         <!--确认密码输入框-->
         <EditText
+            android:id="@+id/et_confirm_password"
             style="@style/EditText"
             android:hint="@string/enter_confirm_password"
             android:maxLength="15"
@@ -53,6 +58,7 @@
 
         <!--注册按钮-->
         <Button
+            android:id="@+id/bt_register"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/padding_large"
