@@ -4,8 +4,6 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor;
 import com.example.mycloudmusic.AppContext;
 import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.Sheet;
-import com.example.mycloudmusic.domain.SheetDetailWrapper;
-import com.example.mycloudmusic.domain.SheetListWrapper;
 import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
@@ -64,7 +62,7 @@ public class Api {
             okhttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
 
             //添加Chucker实现应用内显示网络请求拦截器
-            okhttpClientBuilder.addInterceptor(new ChuckerInterceptor(AppContext.getContext()));
+            okhttpClientBuilder.addInterceptor(new ChuckerInterceptor(AppContext.getInstance()));
         }
 
         //初始化retrofit

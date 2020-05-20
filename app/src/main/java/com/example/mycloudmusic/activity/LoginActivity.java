@@ -1,46 +1,24 @@
 package com.example.mycloudmusic.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mycloudmusic.AppContext;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.Session;
-import com.example.mycloudmusic.domain.Sheet;
-import com.example.mycloudmusic.domain.SheetDetailWrapper;
-import com.example.mycloudmusic.domain.SheetListWrapper;
 import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
-import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
-import com.example.mycloudmusic.listener.ObserverAdapter;
 import com.example.mycloudmusic.network.Api;
-import com.example.mycloudmusic.network.Service;
-import com.example.mycloudmusic.util.Constant;
-import com.example.mycloudmusic.util.HttpUtil;
-import com.example.mycloudmusic.util.LoadingUtil;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.StringUtil;
 import com.example.mycloudmusic.util.ToastUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.HttpException;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 登录界面
@@ -343,6 +321,10 @@ public class LoginActivity extends BaseTitleActivity {
                     @Override
                     public void onSucceeded(DetailResponse<Session> data) {
                         LogUtil.d(TAG,"onLoginClick success:"+data.getData().getSession());
+
+                        //把登录成功的事件通知到AppContext
+                        AppContext.getInstance().login(sp, data.getData());
+
                         ToastUtil.successShortToast(R.string.login_success);
                     }
                 });

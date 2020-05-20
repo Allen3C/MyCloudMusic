@@ -16,6 +16,8 @@ public class PreferenceUtil {
      * 是否显示引导界面key
      */
     private static final String SHOW_GUIDE = "SHOW_GUIDE";
+    private static final String SESSION = "SESSION";
+    private static final String USER_ID = "USER_ID";
 
     private static PreferenceUtil instance;
     private final Context context;
@@ -53,5 +55,37 @@ public class PreferenceUtil {
      */
     public void setShowGuide(boolean value){
         sharedPreferences.edit().putBoolean(SHOW_GUIDE, value).commit();
+    }
+
+    /**
+     *保存登录后的Session
+     * @param value
+     */
+    public void setSession(String value) {
+        sharedPreferences.edit().putString(SESSION, value).commit();
+    }
+
+    /**
+     * 获取登录后的Session
+     * @return
+     */
+    public String getSession(){
+        return sharedPreferences.getString(SESSION, null);
+    }
+
+    /**
+     * 保存用户id
+     * @param value
+     */
+    public void setUserId(String value) {
+        sharedPreferences.edit().putString(USER_ID, value).commit();
+    }
+
+    /**
+     * 获取用户id
+     * @return
+     */
+    public String getUserId(){
+        return sharedPreferences.getString(USER_ID, null);
     }
 }
