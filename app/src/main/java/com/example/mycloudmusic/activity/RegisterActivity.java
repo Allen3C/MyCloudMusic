@@ -26,7 +26,7 @@ import butterknife.OnClick;
 /**
  * 注册界面
  */
-public class RegisterActivity extends BaseTitleActivity {
+public class RegisterActivity extends BaseLoginActivity {
 
     private static final String TAG = "RegisterActivity";
     @BindView(R.id.et_nickname)
@@ -126,41 +126,9 @@ public class RegisterActivity extends BaseTitleActivity {
             public void onSucceeded(DetailResponse<BaseModel> data) {
                 LogUtil.d(TAG, "register success:" + data.getData().getId());
 
-                //自动登录
+                //自动登录  调用父类登录方法
                 login(phone, email, password);
             }
         });
-    }
-
-    /**
-     * 登录
-     * @param phone
-     * @param email
-     * @param password
-     */
-    public void login(String phone, String email, String password){
-        User user = new User();
-        //这里虽然同时传递了手机号和邮箱
-        //但服务端登录的时候有先后顺序
-        user.setPhone(phone);
-        user.setEmail(email);
-        user.setPassword(password);
-        //调用登录接口
-        Api.getInstance()
-                .login(user)
-                .subscribe(new HttpObserver<DetailResponse<Session>>() {
-                    @Override
-                    public void onSucceeded(DetailResponse<Session> data) {
-                        LogUtil.d(TAG,"onLoginClick success:"+data.getData().getSession());
-
-                        //把登录成功的事件通知到AppContext
-                        AppContext.getInstance().login(sp, data.getData());
-
-                        ToastUtil.successShortToast(R.string.login_success);
-
-                        //关闭当前界面并启动主界面
-                        startActivityAfterFinnishThis(MainActivity.class);
-                    }
-                });
     }
 }

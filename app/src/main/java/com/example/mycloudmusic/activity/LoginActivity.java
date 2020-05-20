@@ -24,7 +24,7 @@ import butterknife.OnClick;
 /**
  * 登录界面
  */
-public class LoginActivity extends BaseTitleActivity {
+public class LoginActivity extends BaseLoginActivity {
 
     private static final String TAG = "LoginActivity";
     @BindView(R.id.et_username)
@@ -309,30 +309,33 @@ public class LoginActivity extends BaseTitleActivity {
         }else {
             email = username;
         }
+        //调用父类登录方法
+        login(phone, email, password);
 
-        User user = new User();
-        //这里虽然同时传递了手机号和邮箱
-        //但服务端登录的时候有先后顺序
-        user.setPhone(phone);
-        user.setEmail(email);
-        user.setPassword(password);
-        //调用登录接口
-        Api.getInstance()
-                .login(user)
-                .subscribe(new HttpObserver<DetailResponse<Session>>() {
-                    @Override
-                    public void onSucceeded(DetailResponse<Session> data) {
-                        LogUtil.d(TAG,"onLoginClick success:"+data.getData().getSession());
+//        User user = new User();
+//        //这里虽然同时传递了手机号和邮箱
+//        //但服务端登录的时候有先后顺序
+//        user.setPhone(phone);
+//        user.setEmail(email);
+//        user.setPassword(password);
+//        //调用登录接口
+//        Api.getInstance()
+//                .login(user)
+//                .subscribe(new HttpObserver<DetailResponse<Session>>() {
+//                    @Override
+//                    public void onSucceeded(DetailResponse<Session> data) {
+//                        LogUtil.d(TAG,"onLoginClick success:"+data.getData().getSession());
+//
+//                        //把登录成功的事件通知到AppContext
+//                        AppContext.getInstance().login(sp, data.getData());
+//
+//                        ToastUtil.successShortToast(R.string.login_success);
+//
+//                        //关闭当前界面并启动主界面
+//                        startActivityAfterFinnishThis(MainActivity.class);
+//                    }
+//                });
 
-                        //把登录成功的事件通知到AppContext
-                        AppContext.getInstance().login(sp, data.getData());
-
-                        ToastUtil.successShortToast(R.string.login_success);
-
-                        //关闭当前界面并启动主界面
-                        startActivityAfterFinnishThis(MainActivity.class);
-                    }
-                });
     }
     /**
      * 忘记密码按钮点击了
