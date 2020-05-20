@@ -2,6 +2,7 @@ package com.example.mycloudmusic.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 /**
  * 偏好设置工具类
@@ -87,6 +88,14 @@ public class PreferenceUtil {
      */
     public String getUserId(){
         return sharedPreferences.getString(USER_ID, null);
+    }
+
+    /**
+     * 是否登录了
+     * @return
+     */
+    public boolean isLogin() {
+        return !TextUtils.isEmpty(getSession());
     }
 
     //辅助方法

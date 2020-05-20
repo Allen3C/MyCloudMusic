@@ -5,6 +5,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mycloudmusic.AppContext;
+import com.example.mycloudmusic.MainActivity;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.User;
@@ -326,6 +327,9 @@ public class LoginActivity extends BaseTitleActivity {
                         AppContext.getInstance().login(sp, data.getData());
 
                         ToastUtil.successShortToast(R.string.login_success);
+
+                        //关闭当前界面并启动主界面
+                        startActivityAfterFinnishThis(MainActivity.class);
                     }
                 });
     }

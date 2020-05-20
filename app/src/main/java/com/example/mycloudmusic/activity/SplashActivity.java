@@ -11,6 +11,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
+import com.example.mycloudmusic.MainActivity;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.LogUtil;
@@ -43,14 +44,17 @@ public class SplashActivity extends BaseCommonActivity {
     };
 
     private void next() {
-        startActivityAfterFinnishThis(GuideActivity.class);
-//        if(sp.isShowGuide()){
-//            //跳转引导界面
-//            startActivityAfterFinnishThis(GuideActivity.class);
-//        }else{
-//            //跳转登录注册界面
-//            startActivityAfterFinnishThis(LoginOrRegisterActivity.class);
-//        }
+//        startActivityAfterFinnishThis(GuideActivity.class);
+        if(sp.isShowGuide()){
+            //跳转引导界面
+            startActivityAfterFinnishThis(GuideActivity.class);
+        }else if(sp.isLogin()){
+            //已经登录了 跳转到首页
+            startActivityAfterFinnishThis(MainActivity.class);
+        }else{
+            //跳转登录注册界面
+            startActivityAfterFinnishThis(LoginOrRegisterActivity.class);
+        }
     }
 
     @Override
