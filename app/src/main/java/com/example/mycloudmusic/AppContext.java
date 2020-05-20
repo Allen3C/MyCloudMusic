@@ -6,6 +6,7 @@ import android.content.Context;
 import androidx.multidex.MultiDex;
 
 import com.example.mycloudmusic.util.ToastUtil;
+import com.facebook.stetho.Stetho;
 
 import es.dmoral.toasty.Toasty;
 
@@ -23,6 +24,10 @@ public class AppContext extends Application {
         Toasty.Config.getInstance().apply();
         //初始化toast工具类
         ToastUtil.init(getApplicationContext());
+
+        //初始化Stetho抓包
+//使用默认参数初始化
+        Stetho.initializeWithDefaults(this);
     }
 
     @Override

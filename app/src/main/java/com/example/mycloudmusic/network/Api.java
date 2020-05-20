@@ -8,6 +8,7 @@ import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.LogUtil;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -55,6 +56,9 @@ public class Api {
 
             //添加到网络框架中
             okhttpClientBuilder.addInterceptor(interceptor);
+
+            //添加Stetho抓包拦截器
+            okhttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
         }
 
         //初始化retrofit
