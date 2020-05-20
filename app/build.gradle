@@ -109,4 +109,9 @@ dependencies {
     //实现在Chrome中抓包
     implementation 'com.facebook.stetho:stetho:1.5.1'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+
+    //通过OkHttp的拦截器机制
+    //实现在应用内显示网络请求功能
+    debugImplementation "com.github.ChuckerTeam.Chucker:library:3.0.1"
+    releaseImplementation "com.github.ChuckerTeam.Chucker:library-no-op:3.0.1"
 }

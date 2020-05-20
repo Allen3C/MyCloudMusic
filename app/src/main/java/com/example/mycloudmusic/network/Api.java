@@ -1,5 +1,7 @@
 package com.example.mycloudmusic.network;
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor;
+import com.example.mycloudmusic.AppContext;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
@@ -59,6 +61,9 @@ public class Api {
 
             //添加Stetho抓包拦截器
             okhttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
+
+            //添加Chucker实现应用内显示网络请求拦截器
+            okhttpClientBuilder.addInterceptor(new ChuckerInterceptor(AppContext.getContext()));
         }
 
         //初始化retrofit
