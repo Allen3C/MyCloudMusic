@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.domain.event.LoginSuccessEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,6 +42,13 @@ public class LoginOrRegisterActivity extends BaseCommonActivity {
 
 //        bt_login = findViewById(R.id.bt_login);
 //        bt_register = findViewById(R.id.bt_register);
+    }
+
+    @Override
+    protected void initDatum() {
+        super.initDatum();
+        //注册通知
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -76,5 +88,23 @@ public class LoginOrRegisterActivity extends BaseCommonActivity {
     @OnClick(R.id.bt_register)
     public void onRegisterClick(){
         startActivity(RegisterActivity.class);
+    }
+
+    /**
+     * 登录成功事件
+     * 接受该事件的目的是关闭该界面
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginSuccssEvent(LoginSuccessEvent event){
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        //取消注册
+        EventBus.getDefault().unregister(this);
+
+        super.onDestroy();
     }
 }

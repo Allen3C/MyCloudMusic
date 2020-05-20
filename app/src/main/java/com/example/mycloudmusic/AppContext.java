@@ -6,9 +6,12 @@ import android.content.Context;
 import androidx.multidex.MultiDex;
 
 import com.example.mycloudmusic.domain.Session;
+import com.example.mycloudmusic.domain.event.LoginSuccessEvent;
 import com.example.mycloudmusic.util.PreferenceUtil;
 import com.example.mycloudmusic.util.ToastUtil;
 import com.facebook.stetho.Stetho;
+
+import org.greenrobot.eventbus.EventBus;
 
 import es.dmoral.toasty.Toasty;
 
@@ -64,6 +67,9 @@ public class AppContext extends Application {
         sp.setUserId(data.getUser());
         //初始化其他登录后才需要初始化的内容
         onLogin();
+        //发送登录成功通知
+        //目的是一些界面需要接收该事件
+        EventBus.getDefault().post(new LoginSuccessEvent());
     }
 
     /**
