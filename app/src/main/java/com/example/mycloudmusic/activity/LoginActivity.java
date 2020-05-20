@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
@@ -285,44 +286,66 @@ public class LoginActivity extends BaseTitleActivity {
 
 //
 
-        //测试自动显示隐藏对话框
-        Api.getInstance().sheetDetail("1").subscribe(new HttpObserver<DetailResponse<Sheet>>(getMainActivity(), true) {
-            @Override
-            public void onSucceeded(DetailResponse<Sheet> data) {
-                LogUtil.d(TAG, "onNext:" + data.getData().getTitle());
-            }
-        });
+//        //测试自动显示隐藏对话框
+//        Api.getInstance().sheetDetail("1").subscribe(new HttpObserver<DetailResponse<Sheet>>(getMainActivity(), true) {
+//            @Override
+//            public void onSucceeded(DetailResponse<Sheet> data) {
+//                LogUtil.d(TAG, "onNext:" + data.getData().getTitle());
+//            }
+//        });
 
-//        //获取用户名
-//        String username = et_username.getText().toString().trim();
-//        if(StringUtils.isBlank(username)){
-//            LogUtil.w(TAG, "onLoginClick username empty");
-////            Toast.makeText(getMainActivity(), R.string.enter_username, Toast.LENGTH_SHORT).show();
-//            ToastUtil.errorShortToast(R.string.enter_username);
-//            return;
-//        }
-//        //如果用户名
-//        //不是手机号也不是邮箱
-//        //就是格式错误
-//        if(!(StringUtil.isPhone(username) || StringUtil.isEmail(username))){
-//            ToastUtil.errorShortToast( R.string.error_username_format);
-//            return;
-//        }
-//        //获取密码
-//        String password = et_password.getText().toString().trim();
-//        if(StringUtils.isBlank(password)){
-//            LogUtil.w(TAG, "onLoginClick password empty");
-////            Toast.makeText(getMainActivity(), R.string.enter_password, Toast.LENGTH_SHORT).show();
-//            ToastUtil.errorShortToast( R.string.enter_password);
-//            return;
-//        }
-//        //判断密码格式
-//        if(!(StringUtil.isPassword(password))){
-//            ToastUtil.errorShortToast(R.string.error_password_format);
-//            return;
-//        }
-//        // TODO: 20-5-18 调用登录方法
-//        ToastUtil.successShortToast(R.string.login_success);
+        //获取用户名
+        String username = et_username.getText().toString().trim();
+        if(StringUtils.isBlank(username)){
+            LogUtil.w(TAG, "onLoginClick username empty");
+            ToastUtil.errorShortToast(R.string.enter_username);
+            return;
+        }
+        //如果用户名
+        //不是手机号也不是邮箱
+        //就是格式错误
+        if(!(StringUtil.isPhone(username) || StringUtil.isEmail(username))){
+            ToastUtil.errorShortToast( R.string.error_username_format);
+            return;
+        }
+        //获取密码
+        String password = et_password.getText().toString().trim();
+        if(StringUtils.isBlank(password)){
+            LogUtil.w(TAG, "onLoginClick password empty");
+            ToastUtil.errorShortToast( R.string.enter_password);
+            return;
+        }
+        //判断密码格式
+        if(!(StringUtil.isPassword(password))){
+            ToastUtil.errorShortToast(R.string.error_password_format);
+            return;
+        }
+
+        //登录
+        //判断手机号还是邮箱
+        String phone = null;
+        String email = null;
+        if(StringUtil.isPhone(username)){
+            phone = username;
+        }else {
+            email = username;
+        }
+        User user = new User();
+        //这里虽然同时传递了手机号和邮箱
+        //但服务端登录的时候有先后顺序
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setPassword(password);
+        //调用登录接口
+        Api.getInstance()
+                .login(user)
+                .subscribe(new HttpObserver<DetailResponse<Session>>() {
+                    @Override
+                    public void onSucceeded(DetailResponse<Session> data) {
+                        LogUtil.d(TAG,"onLoginClick success:"+data.getData().getSession());
+                        ToastUtil.successShortToast(R.string.login_success);
+                    }
+                });
     }
     /**
      * 忘记密码按钮点击了

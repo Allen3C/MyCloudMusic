@@ -2,6 +2,7 @@ package com.example.mycloudmusic.network;
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor;
 import com.example.mycloudmusic.AppContext;
+import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
@@ -131,7 +132,16 @@ public class Api {
     }
 
     /**
-     * 歌单详情
+     * 登录
+     */
+    public Observable<DetailResponse<Session>> login(User data){
+        return service.login(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 用户详情
      *
      * @param id
      * @return

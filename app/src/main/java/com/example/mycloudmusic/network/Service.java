@@ -1,5 +1,6 @@
 package com.example.mycloudmusic.network;
 
+import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
@@ -10,7 +11,9 @@ import com.example.mycloudmusic.domain.response.ListResponse;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -38,6 +41,12 @@ public interface Service {
      */
     @GET("v1/sheets/{id}")
     Observable<DetailResponse<Sheet>> sheetDetail(@Path("id") String id);
+
+    /**
+     *登录
+     */
+    @POST("v1/sessions")
+    Observable<DetailResponse<Session>> login(@Body User data);
 
     /**
      * 用户详情
