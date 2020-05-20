@@ -9,7 +9,7 @@ import com.example.mycloudmusic.R;
 /**
  * 注册界面
  */
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseTitleActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

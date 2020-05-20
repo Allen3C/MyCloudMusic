@@ -6,8 +6,8 @@
 
     <!-- 登录注册相关 -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login">登 录</string>
-    <string name="register">注 册</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
     <string name="other_login">其他登录方式</string>
     <string name="enter_username">请输入手机号/邮箱</string>
     <string name="enter_password">请输入密码(6~15位)</string>
@@ -25,4 +25,8 @@
     <string name="error_network_server">服务器错误，请稍后再试！</string>
     <string name="error_network_unknown">未知错误，请稍后再试！</string>
     <string name="loading">拼命加载中...</string>
+    <string name="enter_nickname">请输入昵称(2～10位)</string>
+    <string name="enter_phone">请输入手机号</string>
+    <string name="enter_email">请输入邮箱</string>
+    <string name="enter_confirm_password">请确认密码</string>
 </resources>
