@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.PreferenceUtil;
+
+import java.io.Serializable;
 
 import butterknife.ButterKnife;
 
@@ -120,6 +123,14 @@ public class BaseCommonActivity extends BaseActivity {
         startActivity(clazz);
         //关闭当前界面，就是跳转之后按导航栏的返回回不到当前界面了
         finish();
+    }
+
+    /**
+     * 获取data对象
+     * @return
+     */
+    protected Serializable extraData() {
+        return getIntent().getSerializableExtra(Constant.DATA);
     }
     /**
      * 获取界面

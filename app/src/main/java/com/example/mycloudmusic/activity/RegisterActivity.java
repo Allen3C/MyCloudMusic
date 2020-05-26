@@ -3,6 +3,7 @@ package com.example.mycloudmusic.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mycloudmusic.AppContext;
@@ -14,11 +15,14 @@ import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
 import com.example.mycloudmusic.network.Api;
+import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.StringUtil;
 import com.example.mycloudmusic.util.ToastUtil;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,11 +43,37 @@ public class RegisterActivity extends BaseLoginActivity {
     EditText et_password;
     @BindView(R.id.et_confirm_password)
     EditText et_confirm_password;
+    @BindView(R.id.bt_register)
+    Button bt_register;
+
+    /**
+     * 第三方登陆后用户信息 可能为空
+     */
+    private User data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+    }
+
+    @Override
+    protected void initDatum() {
+        super.initDatum();
+        //获取传递的用户信息
+        data = (User) extraData();
+        if(data != null && (StringUtils.isNotBlank(data.getQq_id()) || StringUtils.isNotBlank(data.getWeibo_id()))){
+            //第三方登录跳转过来的
+
+            //设置标题
+            setTitle(R.string.register2);
+            //将你唱歌呢显示到输入框
+            et_nickname.setText(data.getNickname());
+            //更改注册按钮标题
+            bt_register.setText(R.string.complete_register);
+        }else {
+            //不是第三方登录不用做任何处理
+        }
     }
 
     @OnClick(R.id.bt_register)
@@ -114,7 +144,7 @@ public class RegisterActivity extends BaseLoginActivity {
 
         //调用注册接口完成用户注册
 
-        User user = new User();
+        User user = getData();
         //将信息设置到对象上
         user.setNickname(nickname);
         user.setPhone(phone);
@@ -130,5 +160,19 @@ public class RegisterActivity extends BaseLoginActivity {
                 login(phone, email, password);
             }
         });
+    }
+
+    /**
+     * 获取用户对象
+     * 如果传递了用户对象直接复用
+     * 否则创建一个新对象
+     *
+     * @return
+     */
+    private User getData() {
+        if(data == null){
+            data = new User();
+        }
+        return data;
     }
 }

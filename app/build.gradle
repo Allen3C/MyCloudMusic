@@ -1,5 +1,7 @@
 //应用Android插件
 apply plugin: 'com.android.application'
+//sharesdk
+apply plugin: 'com.mob.sdk'
 
 android {
     //配置不同的环境
@@ -98,6 +100,29 @@ android {
 
             //使用签名配置
             signingConfig signingConfigs.release
+        }
+    }
+
+}
+
+//sharesdk配置
+MobSDK {
+    appKey "2f689abd9b948"
+    appSecret "73f94dd73bf6708279512734a635b61f"
+
+    //第三方平台配置
+    ShareSDK {
+        devInfo {
+            QQ {
+                id 7
+                sortId 7
+                appId "101880638"
+                appKey "6302dec5ffa671f39bffea901d67a71d"
+                shareByAppClient true
+                bypassApproval false
+                enable true
+            }
+
         }
     }
 

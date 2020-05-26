@@ -36,4 +36,8 @@ public class Constant {
      * 用户详情昵称查询字段
      */
     public static final String NICKNAME = "nickname";
+    /**
+     * 传递data key
+     */
+    public static final String DATA = "DATA";
 }
