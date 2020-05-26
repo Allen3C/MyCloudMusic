@@ -8,12 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.mycloudmusic.AppContext;
+import com.example.mycloudmusic.MainActivity;
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.event.LoginSuccessEvent;
+import com.example.mycloudmusic.domain.response.DetailResponse;
+import com.example.mycloudmusic.listener.HttpObserver;
+import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.HandlerUtil;
 import com.example.mycloudmusic.util.LogUtil;
+import com.example.mycloudmusic.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -159,8 +166,11 @@ public class LoginOrRegisterActivity extends BaseCommonActivity {
                 data.setAvatar(db.getUserIcon());
                 data.setQq_id(db.getUserId());
 
-                //跳转到注册界面
-                toRegister();
+//                //跳转到注册界面
+//                toRegister();
+
+                //继续登录
+                continueLogin();
 
                // LogUtil.d(TAG, "other login success:" + nickname + "," + avatar + "," + openId + "," + HandlerUtil.isMainThread());
             }
@@ -190,6 +200,56 @@ public class LoginOrRegisterActivity extends BaseCommonActivity {
         //authorize与showUser单独调用一个即可
         //授权并获取用户信息
         platform.showUser(null);
+    }
+
+    /**
+     * 继续登录
+     */
+    private void continueLogin() {
+        Api.getInstance().login(data).subscribe(new HttpObserver<DetailResponse<Session>>() {
+            /**
+             * 登录成功
+             * @param data
+             */
+            @Override
+            public void onSucceeded(DetailResponse<Session> data) {
+                //把登录成功的事件通知到AppContext
+                AppContext.getInstance().login(sp, data.getData());
+
+                ToastUtil.successShortToast(R.string.login_success);
+
+                //关闭当前界面并启动主界面
+                startActivityAfterFinnishThis(MainActivity.class);
+            }
+
+            /**
+             * 登录失败
+             * @param data
+             * @param e
+             * @return
+             */
+            @Override
+            public boolean onFailed(DetailResponse<Session> data, Throwable e) {
+
+                if (data != null) {
+                    //请求成功了
+                    //并且服务端还返回了错误信息
+
+                    //判断错误码
+                    if (1010 == data.getStatus()) {
+                        //用户未注册
+
+                        //跳转到补充用户资料界面
+                        toRegister();
+
+                        //返回true表示手动处理了错误
+                        return true;
+                    }
+                }
+                //其他错误让父类处理
+                return super.onFailed(data, e);
+            }
+        });
     }
 
     /**

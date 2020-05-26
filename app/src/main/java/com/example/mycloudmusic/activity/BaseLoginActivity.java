@@ -37,15 +37,23 @@ public class BaseLoginActivity extends BaseTitleActivity {
                     @Override
                     public void onSucceeded(DetailResponse<Session> data) {
                         LogUtil.d(TAG,"onLoginClick success:"+data.getData().getSession());
+                        onLogin(data.getData());
 
-                        //把登录成功的事件通知到AppContext
-                        AppContext.getInstance().login(sp, data.getData());
-
-                        ToastUtil.successShortToast(R.string.login_success);
-
-                        //关闭当前界面并启动主界面
-                        startActivityAfterFinnishThis(MainActivity.class);
                     }
                 });
+    }
+
+    /**
+     * 登录成功
+     * @param data
+     */
+    private void onLogin(Session data) {
+        //把登录成功的事件通知到AppContext
+        AppContext.getInstance().login(sp, data);
+
+        ToastUtil.successShortToast(R.string.login_success);
+
+        //关闭当前界面并启动主界面
+        startActivityAfterFinnishThis(MainActivity.class);
     }
 }
