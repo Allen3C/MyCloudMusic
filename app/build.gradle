@@ -114,12 +114,21 @@ MobSDK {
     ShareSDK {
         devInfo {
             QQ {
-                id 7
-                sortId 7
+                id 1
+                sortId 1
                 appId "101880638"
                 appKey "6302dec5ffa671f39bffea901d67a71d"
                 shareByAppClient true
                 bypassApproval false
+                enable true
+            }
+            SinaWeibo {
+                id 2
+                sortId 2
+                appKey "1016702613"
+                appSecret "898cb1577f3eedcd5e455065a8929fb0"
+                callbackUri "http://www.ixuea.com"
+                shareByAppClient true
                 enable true
             }
 

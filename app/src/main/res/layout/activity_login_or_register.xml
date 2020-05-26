@@ -92,6 +92,7 @@
             <include layout="@layout/fill"/>
             <!--微博登录按钮-->
             <ImageView
+                android:id="@+id/iv_weibo"
                 android:src="@drawable/selector_login_weibo"
                 android:clickable="true"
                 android:layout_width="wrap_content"
