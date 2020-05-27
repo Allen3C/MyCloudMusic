@@ -5,11 +5,11 @@ apply plugin: 'com.mob.sdk'
 
 android {
     //配置不同的环境
-    productFlavors{
+    productFlavors {
         //开发环境
         dev {
             //API端点
-            buildConfigField('String',"ENDPOINT",'"http://dev-my-cloud-music-api-rails.ixuea.com/"')
+            buildConfigField('String', "ENDPOINT", '"http://dev-my-cloud-music-api-rails.ixuea.com/"')
 
             dimension = minSdkVersion
         }
@@ -17,7 +17,7 @@ android {
         //正式环境
         prod {
             //API端点
-            buildConfigField 'String','ENDPOINT','"http://api-courses-misuc.ixuea.com/"'
+            buildConfigField 'String', 'ENDPOINT', '"http://api-courses-misuc.ixuea.com/"'
 
             dimension = minSdkVersion
         }

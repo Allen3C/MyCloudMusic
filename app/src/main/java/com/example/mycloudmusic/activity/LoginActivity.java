@@ -343,5 +343,7 @@ public class LoginActivity extends BaseLoginActivity {
     @OnClick(R.id.bt_forget_password)
     public void onForgetPasswordClick() {
         LogUtil.d(TAG, "onForgetPasswordClick");
+        //跳转到找回密码界面
+        startActivity(ForgetPasswordActivity.class);
     }
 }
