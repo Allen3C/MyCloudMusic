@@ -174,6 +174,17 @@ public class Api {
     }
 
     /**
+     * 发送邮箱验证码
+     * @param data
+     * @return
+     */
+    public Observable<DetailResponse<BaseModel>> sendEmailCode(User data){
+        return service.sendEmailCode(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
      * 用户详情
      *
      * @param id

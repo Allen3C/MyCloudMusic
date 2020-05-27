@@ -79,33 +79,6 @@ public class ForgetPasswordActivity extends BaseLoginActivity {
     }
 
     /**
-     * 发送邮件验证码
-     * @param value
-     */
-    private void sendEmailCode(String value) {
-
-    }
-
-    /**
-     * 发送手机号验证码
-     * @param value
-     */
-    private void sendSMSCode(String value) {
-        User data = new User();
-        data.setPhone(value);
-
-        //调用接口
-        Api.getInstance().sendSMSCode(data).subscribe(new HttpObserver<DetailResponse<BaseModel>>() {
-            @Override
-            public void onSucceeded(DetailResponse<BaseModel> data) {
-                //发送成功了
-                //开始倒计时
-                startCountDown();
-            }
-        });
-    }
-
-    /**
      * 找回密码按钮点击
      */
     @OnClick(R.id.bt_forget_password)
@@ -187,6 +160,44 @@ public class ForgetPasswordActivity extends BaseLoginActivity {
                         login(phone, email, password);
                     }
                 });
+    }
+
+    /**
+     * 发送邮件验证码
+     * @param value
+     */
+    private void sendEmailCode(String value) {
+        User data = new User();
+        data.setEmail(value);
+
+        //调用接口
+        Api.getInstance().sendEmailCode(data).subscribe(new HttpObserver<DetailResponse<BaseModel>>() {
+            @Override
+            public void onSucceeded(DetailResponse<BaseModel> data) {
+                //发送成功了
+                //开始倒计时
+                startCountDown();
+            }
+        });
+    }
+
+    /**
+     * 发送手机号验证码
+     * @param value
+     */
+    private void sendSMSCode(String value) {
+        User data = new User();
+        data.setPhone(value);
+
+        //调用接口
+        Api.getInstance().sendSMSCode(data).subscribe(new HttpObserver<DetailResponse<BaseModel>>() {
+            @Override
+            public void onSucceeded(DetailResponse<BaseModel> data) {
+                //发送成功了
+                //开始倒计时
+                startCountDown();
+            }
+        });
     }
 
     /**
