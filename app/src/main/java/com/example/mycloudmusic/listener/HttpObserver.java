@@ -97,9 +97,9 @@ public abstract class HttpObserver<T> extends ObserverAdapter<T> {
         if (t instanceof BaseResponse) {
             //判断具体业务请求是否成功
             BaseResponse response = (BaseResponse) t;
-            //没有状态码表示成功
+            //状态码为0表示成功
             //这是和服务端的一个规定
-            return response.getStatus() == null;
+            return response.getStatus() == 0;
         }
         return false;
     }

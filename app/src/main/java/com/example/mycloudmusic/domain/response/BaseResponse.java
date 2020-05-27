@@ -7,10 +7,9 @@ package com.example.mycloudmusic.domain.response;
 public class BaseResponse {
     /**
      * 状态码
-     *
-     * 只有发生了错误才会有
+     * 正确为0，错误为服务端规定的状态码
      */
-    private Integer status;
+    private int status;
 
 
     /**
@@ -20,11 +19,11 @@ public class BaseResponse {
      */
     private String message;
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public BaseResponse setStatus(Integer status) {
+    public BaseResponse setStatus(int status) {
         this.status = status;
         return this;
     }
