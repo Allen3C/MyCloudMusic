@@ -52,7 +52,7 @@ public class HttpUtil {
             if(data instanceof BaseResponse){
                 //判断具体业务请求是否成功
                 BaseResponse response = (BaseResponse) data;
-                if(StringUtils.isNotBlank(response.getMessage())){
+                if(StringUtils.isBlank(response.getMessage())){
                     //没有错误提示信息
                     ToastUtil.errorShortToast(R.string.error_network_unknown);
                 }else{

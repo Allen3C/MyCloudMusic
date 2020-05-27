@@ -206,8 +206,66 @@ public class LoginOrRegisterActivity extends BaseCommonActivity {
     /**
      * 微博第三方登录
      */
+//    @OnClick(R.id.iv_weibo)
+//    public void onWeiboLoginClick(){
+//        //初始化具体的平台
+//        Platform platform = ShareSDK.getPlatform(SinaWeibo.NAME);
+//
+//        //设置false表示使用SSO授权方式
+//        platform.SSOSetting(false);
+//
+//        //回调信息
+//        //可以在这里获取基本的授权返回的信息
+//        platform.setPlatformActionListener(new PlatformActionListener() {
+//
+//            /**
+//             * 登录成功了
+//             * @param platform
+//             * @param i
+//             * @param hashMap
+//             */
+//            @Override
+//            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+//                //登录成功了
+//
+//                //就可以获取到昵称，头像，OpenId
+//                //该方法回调不是在主线程
+//
+//                //从数据库获取信息
+//                //也可以通过user参数获取
+//                PlatformDb db = platform.getDb();
+//
+//                data = new User();
+//                data.setNickname(db.getUserName());
+//                data.setAvatar(db.getUserIcon());
+//                data.setWeibo_id(db.getUserId());
+//
+//                //继续登录
+//                continueLogin();
+////                String nickname = db.getUserName();
+////                String avatar = db.getUserIcon();
+////                String openId = db.getUserId();
+////
+////                LogUtil.d(TAG, "other login success:" + nickname + "," + avatar + "," + openId + "," + HandlerUtil.isMainThread());
+//            }
+//
+//            @Override
+//            public void onError(Platform platform, int i, Throwable throwable) {
+//                LogUtil.d(TAG, "other login error:" + throwable.getLocalizedMessage() + "," + HandlerUtil.isMainThread());
+//            }
+//
+//            @Override
+//            public void onCancel(Platform platform, int i) {
+//                LogUtil.d(TAG, "other login cancel:" + i + "," + HandlerUtil.isMainThread());
+//            }
+//        });
+//
+//        //authorize与showUser单独调用一个即可
+//        //授权并获取用户信息
+//        platform.showUser(null);
+//    }
     @OnClick(R.id.iv_weibo)
-    public void onWeiboLoginClick(){
+    public void onWeiboLoginClick() {
         //初始化具体的平台
         Platform platform = ShareSDK.getPlatform(SinaWeibo.NAME);
 
@@ -235,11 +293,24 @@ public class LoginOrRegisterActivity extends BaseCommonActivity {
                 //也可以通过user参数获取
                 PlatformDb db = platform.getDb();
 
-                String nickname = db.getUserName();
-                String avatar = db.getUserIcon();
-                String openId = db.getUserId();
+                //String nickname = db.getUserName();
+                //String avatar = db.getUserIcon();
+                //String openId = db.getUserId();
+                //
+                //LogUtil.d(TAG, "other login success:" + nickname + "," + avatar + "," + openId + "," + HandlerUtil.isMainThread());
 
-                LogUtil.d(TAG, "other login success:" + nickname + "," + avatar + "," + openId + "," + HandlerUtil.isMainThread());
+                data = new User();
+
+                data.setNickname(db.getUserName());
+                data.setAvatar(db.getUserIcon());
+
+                data.setWeibo_id(db.getUserId());
+
+                //跳转到注册界面
+                //toRegister();
+
+                //继续登录
+                continueLogin();
             }
 
             @Override
