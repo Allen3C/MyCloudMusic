@@ -6,6 +6,7 @@ import com.example.mycloudmusic.domain.BaseModel;
 import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.User;
+import com.example.mycloudmusic.domain.response.BaseResponse;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.util.Constant;
@@ -146,6 +147,17 @@ public class Api {
      */
     public Observable<DetailResponse<Session>> login(User data){
         return service.login(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 找回密码
+     * @param data
+     * @return
+     */
+    public Observable<BaseResponse> resetPassword(User data){
+        return service.resetPassword(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

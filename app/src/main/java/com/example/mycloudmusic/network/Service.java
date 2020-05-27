@@ -6,6 +6,7 @@ import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.SheetDetailWrapper;
 import com.example.mycloudmusic.domain.SheetListWrapper;
 import com.example.mycloudmusic.domain.User;
+import com.example.mycloudmusic.domain.response.BaseResponse;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 
@@ -56,6 +57,14 @@ public interface Service {
      */
     @POST("v1/sessions")
     Observable<DetailResponse<Session>> login(@Body User data);
+
+    /**
+     * 找回密码
+     * @param data
+     * @return
+     */
+    @POST("v1/users/reset_password")
+    Observable<BaseResponse> resetPassword(@Body User data);
 
     /**
      * 用户详情

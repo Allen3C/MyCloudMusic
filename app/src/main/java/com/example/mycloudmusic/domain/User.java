@@ -37,6 +37,12 @@ public class User extends BaseModel {
      */
     private String weibo_id;
 
+    /**
+     * 验证码
+     * 找回密码时用
+     */
+    private  String code;
+
     public String getPhone() {
         return phone;
     }
@@ -97,6 +103,15 @@ public class User extends BaseModel {
 
     public User setWeibo_id(String weibo_id) {
         this.weibo_id = weibo_id;
+        return this;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public User setCode(String code) {
+        this.code = code;
         return this;
     }
 }
