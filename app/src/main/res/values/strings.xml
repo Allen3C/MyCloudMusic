@@ -41,5 +41,6 @@
     <string name="send_code">发送验证码</string>
     <string name="enter_code">请输入验证码</string>
     <string name="error_code_format">验证码格式错误</string>
+    <string name="count_second">%1$ds</string>
 
 </resources>
