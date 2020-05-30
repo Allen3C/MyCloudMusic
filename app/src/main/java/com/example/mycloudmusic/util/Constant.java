@@ -40,4 +40,12 @@ public class Constant {
      * 传递data key
      */
     public static final String DATA = "DATA";
+    /**
+     * 添加标题 key
+     */
+    public static final String TITLE = "TITLE";
+    /**
+     * 添加URL key
+     */
+    public static final String URL = "URL";
 }

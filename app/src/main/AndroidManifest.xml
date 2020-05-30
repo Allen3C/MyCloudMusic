@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.AdActivity"></activity>
+        <activity android:name=".activity.WebViewActivity"></activity>
+        <activity android:name=".activity.AdActivity" />
         <activity
             android:name=".activity.ForgetPasswordActivity"
             android:label="@string/activity_forget_password" />

@@ -77,7 +77,9 @@ public class AdActivity extends BaseCommonActivity {
      * 进入首页
      */
     private void next() {
-        startActivityAfterFinnishThis(MainActivity.class);
+        //startActivityAfterFinnishThis(MainActivity.class);
+        //显示网页
+        WebViewActivity.start(getMainActivity(),"活动详情","http://www.ixuea.com");
     }
 
     /**
