@@ -175,4 +175,15 @@ public class RegisterActivity extends BaseLoginActivity {
         }
         return data;
     }
+
+    /**
+     * 用户协议点击
+     */
+    @OnClick(R.id.bt_agreement)
+    public void onArgementClick() {
+        //使用webView界面打开用户协议
+        //这里打开的是爱学啊官网用户协议
+        //大家可以根据实际情况修改
+        WebViewActivity.start(getMainActivity(), "用户协议", "http://www.ixuea.com/posts/1");
+    }
 }

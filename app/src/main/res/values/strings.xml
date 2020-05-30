@@ -42,5 +42,6 @@
     <string name="enter_code">请输入验证码</string>
     <string name="error_code_format">验证码格式错误</string>
     <string name="count_second">%1$ds</string>
+    <string name="hint_agreement">注册就代表同意《用户协议》</string>
 
 </resources>
