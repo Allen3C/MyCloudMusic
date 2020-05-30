@@ -2,12 +2,14 @@ package com.example.mycloudmusic.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Button;
 
 import com.example.mycloudmusic.MainActivity;
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.LogUtil;
 
 import butterknife.BindView;
@@ -77,9 +79,7 @@ public class AdActivity extends BaseCommonActivity {
      * 进入首页
      */
     private void next() {
-        //startActivityAfterFinnishThis(MainActivity.class);
-        //显示网页
-        WebViewActivity.start(getMainActivity(),"活动详情","http://www.ixuea.com");
+        startActivityAfterFinnishThis(MainActivity.class);
     }
 
     /**
@@ -88,6 +88,31 @@ public class AdActivity extends BaseCommonActivity {
     @OnClick(R.id.bt_ad)
     public void onAdClick() {
         LogUtil.d(TAG, "onAdClick");
+
+        //取消倒计时
+        cancelCountDown();
+
+        //创建意图
+        Intent intent = new Intent(getMainActivity(),MainActivity.class);
+
+        //添加广告地址
+        //真实项目中
+        //广告地址一般来自网络接口
+        //这里就写死我们爱学啊官网了
+        intent.putExtra(Constant.URL,"http://www.ixuea.com");
+
+        //要跳转到广告界面
+        //先启动主界面的
+        //好处是
+        //用户在广告界面
+        //返回正好看到的主界面
+        //这样才符合应用逻辑
+        intent.setAction(Constant.ACTION_AD);
+
+        //启动界面
+        startActivity(intent);
+
+        finish();
     }
 
     /**

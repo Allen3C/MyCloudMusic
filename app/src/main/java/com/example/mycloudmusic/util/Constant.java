@@ -48,4 +48,8 @@ public class Constant {
      * 添加URL key
      */
     public static final String URL = "URL";
+    /**
+     * 广告点击了
+     */
+    public static final String ACTION_AD = "com.example.mycloudmusic.ACTION_AD";
 }
