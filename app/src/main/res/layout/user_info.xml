@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/padding_large"
+    android:orientation="vertical"
+    android:id="@+id/ll_user"
+    android:clickable="true">
+
+    <!--头像-->
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dnf"
+        android:layout_width="@dimen/avatar_width"
+        android:layout_height="@dimen/avatar_width" />
+
+    <!--昵称-->
+    <TextView
+        android:text="这是昵称"
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_middle"
+        android:textColor="@color/text" />
+
+    <!--描述-->
+    <TextView
+        android:layout_marginTop="@dimen/padding_middle"
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是描述这是这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述"
+        android:textColor="@color/light_grey"
+        android:textSize="@dimen/text_small"
+        android:lines="2"
+        android:ellipsize="end" />
+
+</LinearLayout>

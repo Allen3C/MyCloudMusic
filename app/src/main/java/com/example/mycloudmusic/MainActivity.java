@@ -6,6 +6,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mycloudmusic.activity.BaseCommonActivity;
 import com.example.mycloudmusic.activity.BaseTitleActivity;
@@ -14,6 +16,7 @@ import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.LogUtil;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseTitleActivity {
 
@@ -22,6 +25,13 @@ public class MainActivity extends BaseTitleActivity {
      */
     @BindView(R.id.dl)
     DrawerLayout dl;
+
+    @BindView(R.id.iv_avatar)
+    ImageView iv_avatar;
+    @BindView(R.id.tv_nickname)
+    TextView tv_nickname;
+    @BindView(R.id.tv_description)
+    TextView tv_description;
 
     private static final String TAG = "MainActivity";
 
@@ -76,5 +86,13 @@ public class MainActivity extends BaseTitleActivity {
 
         //处理动作
         processIntent(intent);
+    }
+
+    /**
+     * 用户容器点击
+     */
+    @OnClick(R.id.ll_user)
+    public void onUserClick() {
+        LogUtil.d(TAG,"onUserClick");
     }
 }

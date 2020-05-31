@@ -22,5 +22,7 @@
     <dimen name="guide_indicator_height">40dp</dimen>
     <!--登录注册相关-->
     <dimen name="login_logo_height_or_width">80dp</dimen>
+    <!--用户相关-->
+    <dimen name="avatar_width">80dp</dimen>
 
 </resources>

@@ -29,12 +29,28 @@ tools:openDrawer:预览的时候开启方向
         android:background="@color/background"
         android:layout_gravity="start"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <!--滚动容器-->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="sssss"/>
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!--侧滑内容布局-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!--引入用户布局-->
+                <include layout="@layout/user_info" />
+
+                <!--引入分割线布局-->
+                <include layout="@layout/divider_small" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

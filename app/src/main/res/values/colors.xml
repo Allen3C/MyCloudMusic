@@ -13,6 +13,10 @@
 
     <!--亮一点的灰色-->
     <color name="light_grey">#aaaaaa</color>
+    <color name="text">#333</color>
     <!--全局背景-->
     <color name="background">@color/white</color>
+    <!--分割线颜色-->
+    <color name="divider_color">#e7e9e9</color>
+
 </resources>
