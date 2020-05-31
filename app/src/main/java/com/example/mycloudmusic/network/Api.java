@@ -186,8 +186,8 @@ public class Api {
 
     /**
      * 用户详情
-     *
      * @param id
+     * @param nickname
      * @return
      */
     public Observable<DetailResponse<User>> userDetail(String id, String nickname) {
@@ -203,5 +203,14 @@ public class Api {
                 .subscribeOn(Schedulers.io())
                 //在主线程观察
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 用户详情
+     * @param id
+     * @return
+     */
+    public Observable<DetailResponse<User>> userDetail(String id){
+        return userDetail(id, null);
     }
 }

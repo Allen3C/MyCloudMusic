@@ -12,6 +12,10 @@ import android.widget.TextView;
 import com.example.mycloudmusic.activity.BaseCommonActivity;
 import com.example.mycloudmusic.activity.BaseTitleActivity;
 import com.example.mycloudmusic.activity.WebViewActivity;
+import com.example.mycloudmusic.domain.User;
+import com.example.mycloudmusic.domain.response.DetailResponse;
+import com.example.mycloudmusic.listener.HttpObserver;
+import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.LogUtil;
 
@@ -57,6 +61,45 @@ public class MainActivity extends BaseTitleActivity {
 
         //同步状态
         toggle.syncState();
+    }
+
+    @Override
+    protected void initDatum() {
+        super.initDatum();
+
+        //获取用户信息
+        //当然可以在用户要显示侧滑的时候
+        //才获取用户信息
+        //这样可以减少请求
+        fetchData();
+    }
+
+    /**
+     * 请求数据
+     */
+    private void fetchData() {
+        Api.getInstance().userDetail(sp.getUserId())
+                .subscribe(new HttpObserver<DetailResponse<User>>() {
+                    @Override
+                    public void onSucceeded(DetailResponse<User> data) {
+                        next(data.getData());
+                    }
+                });
+    }
+
+    /**
+     * 显示数据
+     * @param data
+     */
+    private void next(User data) {
+
+        //TODO 显示头像
+
+        //显示昵称
+        tv_nickname.setText(data.getNickname());
+
+        //显示描述
+        tv_description.setText(data.getDescriptionFormat());
     }
 
     /**

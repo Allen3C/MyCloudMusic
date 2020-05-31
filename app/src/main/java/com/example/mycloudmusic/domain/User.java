@@ -1,5 +1,7 @@
 package com.example.mycloudmusic.domain;
 
+import android.text.TextUtils;
+
 /**
  * 用户模型
  */
@@ -42,6 +44,11 @@ public class User extends BaseModel {
      * 找回密码时用
      */
     private  String code;
+
+    /**
+     * 用户描述
+     */
+    private String description;
 
     public String getPhone() {
         return phone;
@@ -114,4 +121,22 @@ public class User extends BaseModel {
         this.code = code;
         return this;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public User setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    //辅助方法
+    public String getDescriptionFormat(){
+        if(TextUtils.isEmpty(description)){
+            return "这个人很懒，没有填写个人信息!";
+        }
+        return description;
+    }
+    //end 辅助方法
 }
