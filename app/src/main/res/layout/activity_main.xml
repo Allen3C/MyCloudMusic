@@ -9,6 +9,7 @@ tools:openDrawer:预览的时候开启方向
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/dl"
+    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <!--这部分是主界面内容-->
@@ -24,6 +25,7 @@ tools:openDrawer:预览的时候开启方向
     那么如果还是start
     那就是从右侧滑出-->
     <LinearLayout
+        android:fitsSystemWindows="true"
         android:background="@color/background"
         android:layout_gravity="start"
         android:layout_width="match_parent"

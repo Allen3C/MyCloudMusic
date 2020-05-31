@@ -13,6 +13,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--状态栏透明-->
+    <style name="AppTheme.NoActionBar.StatusBarTransparent">
+    </style>
+
     <!--AppBarLayout样式-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <!--toolBar样式-->
