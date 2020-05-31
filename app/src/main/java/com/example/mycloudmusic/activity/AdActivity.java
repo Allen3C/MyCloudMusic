@@ -46,33 +46,36 @@ public class AdActivity extends BaseCommonActivity {
     protected void onResume() {
         super.onResume();
 
-        //倒计时的总时间,间隔
-        //单位为毫秒
-        countDownTimer = new CountDownTimer(5000, 1000) {
+//        //倒计时的总时间,间隔
+//        //单位为毫秒
+//        countDownTimer = new CountDownTimer(5000, 1000) {
+//
+//            /**
+//             * 每次间隔调用
+//             * @param millisUntilFinished
+//             */
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                //每次回调
+//                bt_skip_ad.setText(getString(R.string.count_second, millisUntilFinished / 1000));
+//            }
+//
+//            /**
+//             * 倒计时完成
+//             */
+//            @Override
+//            public void onFinish() {
+//                //倒计时完成
+//                //执行下一步
+//                next();
+//            }
+//        };
+//
+//        //启动定时器
+//        countDownTimer.start();
 
-            /**
-             * 每次间隔调用
-             * @param millisUntilFinished
-             */
-            @Override
-            public void onTick(long millisUntilFinished) {
-                //每次回调
-                bt_skip_ad.setText(getString(R.string.count_second, millisUntilFinished / 1000));
-            }
-
-            /**
-             * 倒计时完成
-             */
-            @Override
-            public void onFinish() {
-                //倒计时完成
-                //执行下一步
-                next();
-            }
-        };
-
-        //启动定时器
-        countDownTimer.start();
+        //测试是取消延时
+        next();
     }
 
     /**

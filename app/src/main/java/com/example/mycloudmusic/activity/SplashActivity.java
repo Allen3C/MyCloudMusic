@@ -68,16 +68,19 @@ public class SplashActivity extends BaseCommonActivity {
         //设置界面全屏
         fullScreen();
 
-        //延时3秒
-        //在企业中通常会有很多逻辑处理
-        //所以延时时间最好是用3-消耗的的时间，比如网络请求或更新啥的消耗1秒，那就能保证启动界面总是3秒
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //3秒后执行
-                handler.sendEmptyMessage(MESSAGE_NEXT);
-            }
-        }, DEFAULT_DELAY_TIME);
+//        //延时3秒
+//        //在企业中通常会有很多逻辑处理
+//        //所以延时时间最好是用3-消耗的的时间，比如网络请求或更新啥的消耗1秒，那就能保证启动界面总是3秒
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                //3秒后执行
+//                handler.sendEmptyMessage(MESSAGE_NEXT);
+//            }
+//        }, DEFAULT_DELAY_TIME);
+
+        //测试是取消延时
+        handler.sendEmptyMessage(MESSAGE_NEXT);
     }
 
     @Override
