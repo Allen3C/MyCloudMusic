@@ -8,6 +8,7 @@ tools:openDrawer:预览的时候开启方向
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:id="@+id/dl"
     tools:openDrawer="start">
 
     <!--这部分是主界面内容-->

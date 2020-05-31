@@ -1,16 +1,27 @@
 package com.example.mycloudmusic;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.mycloudmusic.activity.BaseCommonActivity;
+import com.example.mycloudmusic.activity.BaseTitleActivity;
 import com.example.mycloudmusic.activity.WebViewActivity;
 import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.LogUtil;
 
-public class MainActivity extends BaseCommonActivity {
+import butterknife.BindView;
+
+public class MainActivity extends BaseTitleActivity {
+
+    /**
+     * 侧滑控件
+     */
+    @BindView(R.id.dl)
+    DrawerLayout dl;
 
     private static final String TAG = "MainActivity";
 
@@ -21,6 +32,21 @@ public class MainActivity extends BaseCommonActivity {
 
         //处理动作
         processIntent(getIntent());
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+
+        //侧滑配置
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, dl, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        //侧滑监听器
+        dl.addDrawerListener(toggle);
+
+        //同步状态
+        toggle.syncState();
     }
 
     /**

@@ -28,6 +28,11 @@
     <string name="error_confirm_password">两次密码不一致!</string>
     <string name="register2">补充资料</string>
     <string name="complete_register">完成注册</string>
+    <string name="send_code">发送验证码</string>
+    <string name="enter_code">请输入验证码</string>
+    <string name="error_code_format">验证码格式错误</string>
+    <string name="count_second">%1$ds</string>
+    <string name="hint_agreement">注册就代表同意《用户协议》</string>
     <!--网络相关-->
     <string name="error_network_unknown_host">找不到服务器，请稍后再试！</string>
     <string name="error_network_connect">连接失败，请稍后再试！</string>
@@ -38,10 +43,8 @@
     <string name="error_network_server">服务器错误，请稍后再试！</string>
     <string name="error_network_unknown">未知错误，请稍后再试！</string>
     <string name="loading">拼命加载中...</string>
-    <string name="send_code">发送验证码</string>
-    <string name="enter_code">请输入验证码</string>
-    <string name="error_code_format">验证码格式错误</string>
-    <string name="count_second">%1$ds</string>
-    <string name="hint_agreement">注册就代表同意《用户协议》</string>
+    <!--侧滑相关-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>
