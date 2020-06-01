@@ -43,14 +43,260 @@ tools:openDrawer:预览的时候开启方向
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <!--引入用户布局-->
                 <include layout="@layout/user_info" />
 
                 <!--引入分割线布局-->
                 <include layout="@layout/divider_small" />
+
+                <!--按钮容器-->
+                <LinearLayout
+                    style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/my_code" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/scan" />
+                </LinearLayout>
+
+                <!--分割线-->
+                <include layout="@layout/divider_middle"/>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/my_mescsage" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/my_friend" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/my_fans" />
+                </LinearLayout>
+
+                <!--分割线-->
+                <include layout="@layout/divider_middle" />
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/shop" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/my_order" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/my_new_order" />
+                </LinearLayout>
+
+                <!--分割线-->
+                <include layout="@layout/divider_middle" />
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/online_music_free" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/nearby" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/theme" />
+                    <!--值-->
+                    <TextView
+                        style="@style/ItemTextHint"
+                        android:text="官方红" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/recognition_music" />
+                </LinearLayout>
+
+                <!--按钮容器-->
+                <LinearLayout style="@style/ItemContainer">
+                    <!--图标-->
+                    <ImageView
+                        style="@style/ItemIcon"
+                        android:src="@drawable/ic_phone" />
+                    <!--文本-->
+                    <TextView
+                        style="@style/ItemText"
+                        android:text="@string/time_stop" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 
-    </LinearLayout>
+        <!--分割线-->
+        <include layout="@layout/divider_small" />
+
+        <!--底部按钮容器-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/menu_item_height">
+
+            <!--按钮容器-->
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <!--图标-->
+                <ImageView
+                    android:src="@drawable/ic_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <!--文本-->
+                <TextView
+                    android:layout_marginLeft="@dimen/padding_small"
+                    android:text="@string/night_model"
+                    android:textColor="@color/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!--按钮容器-->
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <!--图标-->
+                <ImageView
+                    android:src="@drawable/ic_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <!--文本-->
+                <TextView
+                    android:layout_marginLeft="@dimen/padding_small"
+                    android:text="@string/setting"
+                    android:textColor="@color/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!--按钮容器-->
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <!--图标-->
+                <ImageView
+                    android:src="@drawable/ic_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <!--文本-->
+                <TextView
+                    android:layout_marginLeft="@dimen/padding_small"
+                    android:text="@string/logout"
+                    android:textColor="@color/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout><!--end 这部分是侧滑内容-->
 
 </androidx.drawerlayout.widget.DrawerLayout>
