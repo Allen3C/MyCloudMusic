@@ -98,6 +98,14 @@ public class PreferenceUtil {
         return !TextUtils.isEmpty(getSession());
     }
 
+    /**
+     * 退出
+     */
+    public void logout() {
+        delete(USER_ID);
+        delete(SESSION);
+    }
+
     //辅助方法
     /**
      * 保存字符串
@@ -114,6 +122,13 @@ public class PreferenceUtil {
      */
     private void putBoolean(String key, boolean value) {
         sharedPreferences.edit().putBoolean(key, value).commit();
+    }
+    /**
+     * 删除内容
+     * @param key
+     */
+    private void delete(String key) {
+        sharedPreferences.edit().remove(key).commit();
     }
     //end 辅助方法
 }
