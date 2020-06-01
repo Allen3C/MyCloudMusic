@@ -2,17 +2,20 @@ package com.example.mycloudmusic;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mycloudmusic.activity.BaseCommonActivity;
 import com.example.mycloudmusic.activity.BaseTitleActivity;
+import com.example.mycloudmusic.activity.SettingActivity;
 import com.example.mycloudmusic.activity.WebViewActivity;
 import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
@@ -165,5 +168,24 @@ public class MainActivity extends BaseTitleActivity {
     @OnClick(R.id.ll_user)
     public void onUserClick() {
         LogUtil.d(TAG,"onUserClick");
+    }
+
+    /**
+     * 设置点击
+     */
+    @OnClick(R.id.ll_setting)
+    public void onSettingClick() {
+        LogUtil.d(TAG,"onSettingClick");
+        startActivity(SettingActivity.class);
+
+        //关闭侧滑
+        closeDrawer();
+    }
+
+    /**
+     * 关闭抽屉
+     */
+    private void closeDrawer() {
+        dl.closeDrawer(GravityCompat.START);
     }
 }

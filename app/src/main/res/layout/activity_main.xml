@@ -36,7 +36,8 @@ tools:openDrawer:预览的时候开启方向
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:scrollbars="none">
 
             <!--侧滑内容布局-->
             <LinearLayout
@@ -255,6 +256,7 @@ tools:openDrawer:预览的时候开启方向
 
             <!--按钮容器-->
             <LinearLayout
+                android:id="@+id/ll_setting"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:clickable="true"
