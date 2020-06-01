@@ -19,6 +19,7 @@ import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
 import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.util.Constant;
+import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
 
 import butterknife.BindView;
@@ -120,38 +121,7 @@ public class MainActivity extends BaseTitleActivity {
 //                .into(iv_avatar);
 
         //显示头像
-        if (TextUtils.isEmpty(data.getAvatar())) {
-            //没有头像
-
-            //显示默认头像
-            //iv_avatar.setImageResource(R.drawable.placeholder);
-
-            Glide
-                    .with(this)
-                    .load(R.drawable.dnf)
-                    .into(iv_avatar);
-        }else{
-            //有头像
-
-            if (data.getAvatar().startsWith("http")) {
-                //绝对路径
-                Glide
-                        .with(this)
-                        .load(data.getAvatar())
-                        .into(iv_avatar);
-            }else{
-                //相对路径
-
-                //将图片地址转为绝对地址
-                String uri=String.format(Constant.RESOURCE_ENDPOINT,data.getAvatar());
-
-                //显示图片
-                Glide
-                        .with(this)
-                        .load(uri)
-                        .into(iv_avatar);
-            }
-        }
+        ImageUtil.showAvatar(getMainActivity(), iv_avatar, data.getAvatar());
 
         //显示昵称
         tv_nickname.setText(data.getNickname());
