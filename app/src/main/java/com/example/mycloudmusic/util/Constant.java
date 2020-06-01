@@ -9,9 +9,15 @@ import com.example.mycloudmusic.BuildConfig;
  */
 public class Constant {
     /**
-     * 资源端点
+     * 端点
      */
     public static final String ENDPOINT = BuildConfig.ENDPOINT;
+    /**
+     * 资源端点
+     */
+    public static final String RESOURCE_ENDPOINT = BuildConfig.RESOURCE_ENDPOINT;
+
+
     /**
      * ID常量
      * 用作键值

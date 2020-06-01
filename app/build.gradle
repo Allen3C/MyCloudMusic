@@ -11,13 +11,19 @@ android {
             //API端点
             buildConfigField('String', "ENDPOINT", '"http://dev-my-cloud-music-api-rails.ixuea.com/"')
 
+            //资源短点
+            buildConfigField 'String', 'RESOURCE_ENDPOINT', '"http://dev-cources-music.ixuea.com/%s"'
+
             dimension = minSdkVersion
         }
 
-        //正式环境
+        //正式环境(实际没有)
         prod {
             //API端点
             buildConfigField 'String', 'ENDPOINT', '"http://api-courses-misuc.ixuea.com/"'
+
+            //资源短点
+            buildConfigField 'String', 'RESOURCE_ENDPOINT', '"http://cources-music.ixuea.com/%s"'
 
             dimension = minSdkVersion
         }

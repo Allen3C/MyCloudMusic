@@ -6,9 +6,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.mycloudmusic.activity.BaseCommonActivity;
 import com.example.mycloudmusic.activity.BaseTitleActivity;
 import com.example.mycloudmusic.activity.WebViewActivity;
@@ -93,7 +95,63 @@ public class MainActivity extends BaseTitleActivity {
      */
     private void next(User data) {
 
-        //TODO 显示头像
+//        //显示资源目录图片
+//        //就是应用中drawable和mipmap目录
+//        Glide.with(this).load(R.drawable.dnf).into(iv_avatar);
+
+//        //测试网络地址图片
+//        Glide
+//                .with(this)
+//                .load("http://dev-courses-misuc.ixuea.com/1da1c001e89c4b8780ac8f9780ef881f.jpg")
+//                .into(iv_avatar);
+
+//        //其他配置
+//        Glide
+//                .with(this)
+//                .load(R.drawable.dnf)
+//
+//                //从中心裁剪
+//                .centerCrop()
+//
+//                //占位图
+//                //就是当前真实的图片没有显示出来前
+//                //显示的图片
+//                .placeholder(R.drawable.dnf)
+//                .into(iv_avatar);
+
+        //显示头像
+        if (TextUtils.isEmpty(data.getAvatar())) {
+            //没有头像
+
+            //显示默认头像
+            //iv_avatar.setImageResource(R.drawable.placeholder);
+
+            Glide
+                    .with(this)
+                    .load(R.drawable.dnf)
+                    .into(iv_avatar);
+        }else{
+            //有头像
+
+            if (data.getAvatar().startsWith("http")) {
+                //绝对路径
+                Glide
+                        .with(this)
+                        .load(data.getAvatar())
+                        .into(iv_avatar);
+            }else{
+                //相对路径
+
+                //将图片地址转为绝对地址
+                String uri=String.format(Constant.RESOURCE_ENDPOINT,data.getAvatar());
+
+                //显示图片
+                Glide
+                        .with(this)
+                        .load(uri)
+                        .into(iv_avatar);
+            }
+        }
 
         //显示昵称
         tv_nickname.setText(data.getNickname());

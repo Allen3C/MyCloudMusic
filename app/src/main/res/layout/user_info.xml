@@ -12,8 +12,8 @@
     <!--头像-->
     <ImageView
         android:id="@+id/iv_avatar"
-        android:scaleType="centerCrop"
-        android:src="@drawable/dnf"
+
+
         android:layout_width="@dimen/avatar_width"
         android:layout_height="@dimen/avatar_width" />
 
