@@ -22,4 +22,11 @@ public class LoginactivityTest {
     public void testOther(){
         LogUtil.d(TAG, "testOther");
     }
+
+    /**
+     * 测试登录
+     */
+    public void testLogin(){
+
+    }
 }
