@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
-        // Context of the app under test.
+        // app测试上下文
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
+        //测试包名
         assertEquals("com.example.mycloudmusic", appContext.getPackageName());
     }
 }
