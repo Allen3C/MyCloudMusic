@@ -7,13 +7,34 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycloudmusic.R;
+
+import butterknife.BindView;
 
 /**
  * 首页-“发现”界面
  */
 public class DiscoveryFragment extends BaseCommonFragment {
+
+    @BindView(R.id.rv)
+    RecyclerView rv;
+    private GridLayoutManager layoutManager;
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+
+        //高度固定
+        rv.setHasFixedSize(true);
+
+        //设置显示3列
+        layoutManager = new GridLayoutManager(getMainActivity(), 3);
+        rv.setLayoutManager(layoutManager);
+    }
+
     public static DiscoveryFragment newInstance() {
 
         Bundle args = new Bundle();

@@ -6,12 +6,30 @@ import android.content.Intent;
 import com.example.mycloudmusic.activity.BaseCommonActivity;
 import com.example.mycloudmusic.util.PreferenceUtil;
 
+import butterknife.ButterKnife;
+
 /**
  * 通用公共Fragment
  */
 public abstract class BaseCommonFragment extends BaseFragment {
 
     protected PreferenceUtil sp;
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        if(isBindView()){
+            bindView();
+        }
+    }
+
+    protected void bindView() {
+        ButterKnife.bind(this, getView());
+    }
+
+    protected boolean isBindView() {
+        return true;
+    }
 
     @Override
     protected void initDatum() {
