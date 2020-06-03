@@ -209,4 +209,11 @@ dependencies {
 
     //指示器
     implementation 'com.github.hackware1993:MagicIndicator:1.6.0'
+
+    //recyclerview控件
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha03'
+
+    //封装了RecyclerView
+    //提供更高层次的接口
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
 }
