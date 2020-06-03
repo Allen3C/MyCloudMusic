@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.example.mycloudmusic.activity.BaseCommonActivity;
 import com.example.mycloudmusic.activity.BaseTitleActivity;
 import com.example.mycloudmusic.activity.SettingActivity;
 import com.example.mycloudmusic.activity.WebViewActivity;
+import com.example.mycloudmusic.adapter.MainAdpter;
 import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
@@ -24,6 +26,8 @@ import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,6 +46,9 @@ public class MainActivity extends BaseTitleActivity {
     TextView tv_nickname;
     @BindView(R.id.tv_description)
     TextView tv_description;
+
+    @BindView(R.id.vp)
+    ViewPager vp;
 
     private static final String TAG = "MainActivity";
 
@@ -67,6 +74,22 @@ public class MainActivity extends BaseTitleActivity {
 
         //同步状态
         toggle.syncState();
+
+        //缓存页面数量
+        //默认是缓存一个
+        vp.setOffscreenPageLimit(4);
+
+        //创建Adapter
+        MainAdpter adpter = new MainAdpter(getMainActivity(), getSupportFragmentManager());
+        vp.setAdapter(adpter);
+
+        //创建占位数据
+        ArrayList<Integer> datum = new ArrayList<>();
+        datum.add(0);
+        datum.add(1);
+        datum.add(2);
+        datum.add(3);
+        adpter.setDatum(datum);
     }
 
     @Override
