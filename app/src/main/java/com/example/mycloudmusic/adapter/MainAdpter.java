@@ -3,6 +3,7 @@ package com.example.mycloudmusic.adapter;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -15,6 +16,12 @@ import com.example.mycloudmusic.fragment.VideoFragment;
  * 主界面ViewPager的Adapter
  */
 public class MainAdpter extends BaseFragmentPagerAdapter<Integer> {
+
+    /**
+     * 指示器标题
+     */
+    private static String[] titleNames = {"我的", "发现", "朋友", "视频"};
+
     /**
      * 构造方法
      *
@@ -43,5 +50,17 @@ public class MainAdpter extends BaseFragmentPagerAdapter<Integer> {
             default:
                 return VideoFragment.newInstance();
         }
+    }
+
+    /**
+     * 返回当前指示器位置
+     *
+     * @param position
+     * @return
+     */
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titleNames[position];
     }
 }
