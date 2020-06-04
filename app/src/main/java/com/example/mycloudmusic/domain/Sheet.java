@@ -1,5 +1,7 @@
 package com.example.mycloudmusic.domain;
 
+import java.util.List;
+
 import static com.example.mycloudmusic.util.Constant.TYPE_SHEET;
 
 /**
@@ -17,6 +19,42 @@ public class Sheet extends BaseMultiItemEntity {
      */
     private String banner;
 
+    /**
+     * 描述
+     */
+    private String description;
+
+    /**
+     * 点击数
+     */
+    private int clicks_count;
+
+    /**
+     * 收藏数
+     */
+    private int collections_count;
+
+    /**
+     * 评论数
+     */
+    private int comments_count;
+
+    /**
+     * 音乐数量
+     */
+    private int songs_count;
+
+    /**
+     * 歌单创建者
+     */
+    private User user;
+
+    /**
+     * 歌曲
+     */
+    private List<Song> songs;
+
+
     public String getTitle() {
         return title;
     }
@@ -33,6 +71,65 @@ public class Sheet extends BaseMultiItemEntity {
         this.banner = banner;
     }
 
+    public Sheet setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public int getClicks_count() {
+        return clicks_count;
+    }
+
+    public Sheet setClicks_count(int clicks_count) {
+        this.clicks_count = clicks_count;
+        return this;
+    }
+
+    public int getCollections_count() {
+        return collections_count;
+    }
+
+    public Sheet setCollections_count(int collections_count) {
+        this.collections_count = collections_count;
+        return this;
+    }
+
+    public int getComments_count() {
+        return comments_count;
+    }
+
+    public Sheet setComments_count(int comments_count) {
+        this.comments_count = comments_count;
+        return this;
+    }
+
+    public int getSongs_count() {
+        return songs_count;
+    }
+
+    public Sheet setSongs_count(int songs_count) {
+        this.songs_count = songs_count;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Sheet setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public Sheet setSongs(List<Song> songs) {
+        this.songs = songs;
+        return this;
+    }
+
     /**
      * 使用了BaseRecyclerViewAdapterHelper框架
      * 实现多类型1列表
@@ -47,5 +144,9 @@ public class Sheet extends BaseMultiItemEntity {
     @Override
     public int getSpanSize() {
         return 1;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

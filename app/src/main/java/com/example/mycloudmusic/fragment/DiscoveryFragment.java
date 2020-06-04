@@ -17,11 +17,15 @@ import com.example.mycloudmusic.domain.BaseMultiItemEntity;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.domain.Title;
+import com.example.mycloudmusic.domain.response.ListResponse;
+import com.example.mycloudmusic.listener.HttpObserver;
+import com.example.mycloudmusic.network.Api;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
 
 /**
  * 首页-“发现”界面
@@ -73,29 +77,44 @@ public class DiscoveryFragment extends BaseCommonFragment {
      * 请求数据
      */
     private void fetchData() {
-        //因为现在还没有请求数据
-        //所以添加一些测试数据
-        //目的是让列表显示出来
-        List<BaseMultiItemEntity> datum = new ArrayList<>();
+//        //因为现在还没有请求数据
+//        //所以添加一些测试数据
+//        //目的是让列表显示出来
+//        List<BaseMultiItemEntity> datum = new ArrayList<>();
+//
+//        //添加标题
+//        datum.add(new Title("推荐歌单"));
+//
+//        //添加歌单数据
+//        for (int i = 0; i < 9; i++) {
+//            datum.add(new Sheet());
+//        }
+//
+//        //添加标题
+//        datum.add(new Title("推荐单曲"));
+//
+//        //添加单曲数据
+//        for (int i = 0; i < 9; i++) {
+//            datum.add(new Song());
+//        }
+//
+//        //将数据设置（替换）到适配器
+//        adapter.replaceData(datum);
 
+        //创建列表
+        List<BaseMultiItemEntity> datum = new ArrayList<>();
         //添加标题
         datum.add(new Title("推荐歌单"));
-
-        //添加歌单数据
-        for (int i = 0; i < 9; i++) {
-            datum.add(new Sheet());
-        }
-
-        //添加标题
-        datum.add(new Title("推荐单曲"));
-
-        //添加单曲数据
-        for (int i = 0; i < 9; i++) {
-            datum.add(new Song());
-        }
-
-        //将数据设置（替换）到适配器
-        adapter.replaceData(datum);
+        //歌单API
+        Observable<ListResponse<Sheet>> sheets = Api.getInstance().sheets();
+        //请求数据
+        sheets.subscribe(new HttpObserver<ListResponse<Sheet>>() {
+            @Override
+            public void onSucceeded(ListResponse<Sheet> data) {
+                //添加歌单数据
+                datum.addAll(data.getData());
+            }
+        });
     }
 
     public static DiscoveryFragment newInstance() {
