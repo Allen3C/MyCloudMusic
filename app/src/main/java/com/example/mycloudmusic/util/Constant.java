@@ -58,4 +58,16 @@ public class Constant {
      * 广告点击了
      */
     public static final String ACTION_AD = "com.example.mycloudmusic.ACTION_AD";
+    /**
+     * 标题
+     */
+    public static final int TYPE_TITLE = 0;
+    /**
+     * 歌单
+     */
+    public static final int TYPE_SHEET = 1;
+    /**
+     * 单曲
+     */
+    public static final int TYPE_SONG = 2;
 }
