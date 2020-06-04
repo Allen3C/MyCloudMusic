@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="horizontal"
-    android:gravity="center_vertical"
+<LinearLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#f00"
+    android:layout_height="@dimen/item_title_height"
+    android:layout_marginLeft="@dimen/padding_middle"
+    android:layout_marginRight="@dimen/padding_middle"
+    android:gravity="center_vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--标题-->
     <TextView
-        android:text="这是标题"
+        android:id="@+id/tv_title"
+        tools:text="这是标题"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

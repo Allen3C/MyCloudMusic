@@ -4,6 +4,7 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.BaseMultiItemEntity;
+import com.example.mycloudmusic.domain.Title;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,21 @@ public class DiscoveryAdapter extends BaseMultiItemQuickAdapter<BaseMultiItemEnt
      */
     @Override
     protected void convert(BaseViewHolder helper, BaseMultiItemEntity item) {
+        switch (helper.getItemViewType()) {
+            case TYPE_TITLE:
+                //标题
+                Title title = (Title) item;
+                //设置标题
+                helper.setText(R.id.tv_title, title.getTitle());
+                break;
+            case TYPE_SHEET:
+                //歌单
 
+                break;
+            case TYPE_SONG:
+                //单曲
+
+                break;
+        }
     }
 }
