@@ -11,6 +11,10 @@ public class Title extends BaseMultiItemEntity {
      */
     private String title;
 
+    public Title(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
     }
