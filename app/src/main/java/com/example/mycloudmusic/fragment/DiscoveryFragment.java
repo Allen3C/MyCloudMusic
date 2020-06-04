@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.adapter.DiscoveryAdapter;
 import com.example.mycloudmusic.domain.BaseMultiItemEntity;
@@ -50,6 +51,16 @@ public class DiscoveryFragment extends BaseCommonFragment {
 
         //创建适配器
         adapter = new DiscoveryAdapter();
+
+        //设置列宽度
+        adapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
+                //在这里
+                //获取模型上面的宽度
+                return adapter.getItem(position).getSpanSize();
+            }
+        });
 
         //设置适配器
         rv.setAdapter(adapter);
