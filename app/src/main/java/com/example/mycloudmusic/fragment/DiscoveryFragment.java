@@ -17,6 +17,7 @@ import com.example.mycloudmusic.domain.BaseMultiItemEntity;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.domain.Title;
+import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
 import com.example.mycloudmusic.network.Api;
@@ -107,12 +108,27 @@ public class DiscoveryFragment extends BaseCommonFragment {
         datum.add(new Title("推荐歌单"));
         //歌单API
         Observable<ListResponse<Sheet>> sheets = Api.getInstance().sheets();
-        //请求数据
+        //单曲API
+        Observable<ListResponse<Song>> songs = Api.getInstance().songs();
+        //请求歌单数据
         sheets.subscribe(new HttpObserver<ListResponse<Sheet>>() {
             @Override
             public void onSucceeded(ListResponse<Sheet> data) {
                 //添加歌单数据
                 datum.addAll(data.getData());
+
+                //请求单曲数据
+                songs.subscribe(new HttpObserver<ListResponse<Song>>() {
+                    @Override
+                    public void onSucceeded(ListResponse<Song> data) {
+                        //添加标题
+                        datum.add(new Title("推荐单曲"));
+                        //添加单曲数据
+                        datum.addAll(data.getData());
+                        //设置数据到适配器
+                        adapter.replaceData(datum);
+                    }
+                });
             }
         });
     }

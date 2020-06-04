@@ -5,6 +5,7 @@ import com.example.mycloudmusic.AppContext;
 import com.example.mycloudmusic.domain.BaseModel;
 import com.example.mycloudmusic.domain.Session;
 import com.example.mycloudmusic.domain.Sheet;
+import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.domain.User;
 import com.example.mycloudmusic.domain.response.BaseResponse;
 import com.example.mycloudmusic.domain.response.DetailResponse;
@@ -212,5 +213,15 @@ public class Api {
      */
     public Observable<DetailResponse<User>> userDetail(String id){
         return userDetail(id, null);
+    }
+
+    /**
+     * 单曲
+     * @return
+     */
+    public Observable<ListResponse<Song>> songs(){
+        return service.songs()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }
