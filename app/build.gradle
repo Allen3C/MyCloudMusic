@@ -12,7 +12,7 @@ android {
             buildConfigField('String', "ENDPOINT", '"http://dev-my-cloud-music-api-rails.ixuea.com/"')
 
             //资源短点
-            buildConfigField 'String', 'RESOURCE_ENDPOINT', '"http://dev-cources-music.ixuea.com/%s"'
+            buildConfigField 'String', 'RESOURCE_ENDPOINT', '"http://dev-courses-misuc.ixuea.com/%s"'
 
             dimension = minSdkVersion
         }

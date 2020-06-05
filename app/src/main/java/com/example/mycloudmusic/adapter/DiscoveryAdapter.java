@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.BaseMultiItemEntity;
 import com.example.mycloudmusic.domain.Sheet;
+import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.domain.Title;
 import com.example.mycloudmusic.util.ImageUtil;
 
@@ -72,7 +73,17 @@ public class DiscoveryAdapter extends BaseMultiItemQuickAdapter<BaseMultiItemEnt
                 break;
             case TYPE_SONG:
                 //单曲
-
+                Song song = (Song) item;
+                //显示封面
+                ImageUtil.show((Activity) mContext, helper.getView(R.id.iv_banner), song.getBanner());
+                //设置标题
+                helper.setText(R.id.tv_title, song.getTitle());
+                //播放量
+                helper.setText(R.id.tv_info, String.valueOf(song.getClicks_count()));
+                //歌手头像
+                ImageUtil.showAvatar((Activity) mContext, helper.getView(R.id.iv_avatar), song.getSinger().getAvatar());
+                //歌手昵称
+                helper.setText(R.id.tv_nickname, song.getSinger().getNickname());
                 break;
         }
     }
