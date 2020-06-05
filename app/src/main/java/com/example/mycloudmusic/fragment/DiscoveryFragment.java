@@ -67,11 +67,28 @@ public class DiscoveryFragment extends BaseCommonFragment {
             }
         });
 
+        //添加头部
+        adapter.addHeaderView(createHeaderView());
+
         //设置适配器
         rv.setAdapter(adapter);
 
         //请求数据
         fetchData();
+    }
+
+
+    /**
+     * 创建头部布局
+     *
+     * @return
+     */
+    private View createHeaderView() {
+        //从XML创建View
+        View view = getLayoutInflater().inflate(R.layout.header_discovery, (ViewGroup) rv.getParent(), false);
+
+        //返回控件
+        return view;
     }
 
     /**
