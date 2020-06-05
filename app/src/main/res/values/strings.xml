@@ -62,5 +62,10 @@
     <string name="night_model">夜间模式</string>
     <string name="setting">设置</string>
     <string name="logout">退出</string>
+    <!--主界面相关-->
+    <string name="person_fm">私人FM</string>
+    <string name="day_recommend">每日推荐</string>
+    <string name="sheet">歌单</string>
+    <string name="rank">排行榜</string>
 
 </resources>
