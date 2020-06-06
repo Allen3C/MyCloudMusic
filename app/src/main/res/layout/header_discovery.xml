@@ -82,11 +82,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <!--图标-->
-                <ImageView
-                    android:src="@drawable/selector_day"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+                    <!--图标-->
+                    <ImageView
+                        android:src="@drawable/selector_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--日期-->
+                    <TextView
+                        android:id="@+id/tv_day"
+                        android:layout_marginTop="18dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@drawable/selector_text_color_primary"/>
+                </RelativeLayout>
+
 
                 <!--文本-->
                 <TextView
