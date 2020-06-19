@@ -2,6 +2,7 @@ package com.example.mycloudmusic.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.Song;
 
 /**
@@ -26,7 +27,14 @@ public class SongAdapter extends BaseQuickAdapter<Song, BaseViewHolder> {
      */
     @Override
     protected void convert(BaseViewHolder helper, Song data) {
+        //显示位置
+        helper.setText(R.id.tv_position, String.valueOf(helper.getAdapterPosition() + 1));
 
+        //显示标题
+        helper.setText(R.id.tv_title, data.getTitle());
+
+        //显示信息
+        helper.setText(R.id.tv_info, data.getSinger().getNickname());
     }
 
 }
