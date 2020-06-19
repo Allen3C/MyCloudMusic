@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.adapter.DiscoveryAdapter;
+import com.example.mycloudmusic.domain.Ad;
 import com.example.mycloudmusic.domain.BaseMultiItemEntity;
 import com.example.mycloudmusic.domain.Sheet;
 import com.example.mycloudmusic.domain.Song;
@@ -22,6 +23,7 @@ import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
 import com.example.mycloudmusic.network.Api;
+import com.example.mycloudmusic.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +37,7 @@ import io.reactivex.Observable;
  */
 public class DiscoveryFragment extends BaseCommonFragment {
 
+    private static final String TAG = "DiscoveryFragment";
     @BindView(R.id.rv)
     RecyclerView rv;
     private GridLayoutManager layoutManager;
@@ -77,6 +80,27 @@ public class DiscoveryFragment extends BaseCommonFragment {
 
         //请求数据
         fetchData();
+
+        //请求轮播图数据
+        fetchBannerData();
+    }
+
+    private void fetchBannerData() {
+        Api.getInstance().ads()
+                .subscribe(new HttpObserver<ListResponse<Ad>>() {
+                    @Override
+                    public void onSucceeded(ListResponse<Ad> data) {
+                        showBanner(data.getData());
+                    }
+                });
+    }
+
+    /**
+     * 显示banner
+     * @param data
+     */
+    private void showBanner(List<Ad> data) {
+        LogUtil.d(TAG, "showBanner: " + data.size());
     }
 
 
