@@ -1,9 +1,11 @@
 package com.example.mycloudmusic.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +25,11 @@ import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
 import com.example.mycloudmusic.network.Api;
+import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
+import com.youth.banner.loader.ImageLoaderInterface;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,6 +48,8 @@ public class DiscoveryFragment extends BaseCommonFragment {
     RecyclerView rv;
     private GridLayoutManager layoutManager;
     private DiscoveryAdapter adapter;
+    private Banner banner;
+    private List<Ad> bannerData;
 
     @Override
     protected void initViews() {
@@ -101,8 +109,34 @@ public class DiscoveryFragment extends BaseCommonFragment {
      */
     private void showBanner(List<Ad> data) {
         LogUtil.d(TAG, "showBanner: " + data.size());
+        this.bannerData = data;
+        //设置数据到轮播图组件
+        banner.setImages(data);
+        //显示数据
+        banner.start();
+        //第一次也要滚动
+        startBannerScroll();
     }
 
+    private void startBannerScroll() {
+        banner.startAutoPlay();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(bannerData != null){
+            //有数据才开始滚动
+            startBannerScroll();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //结束轮播图滚动
+        banner.stopAutoPlay();
+    }
 
     /**
      * 创建头部布局
@@ -112,6 +146,12 @@ public class DiscoveryFragment extends BaseCommonFragment {
     private View createHeaderView() {
         //从XML创建View
         View view = getLayoutInflater().inflate(R.layout.header_discovery, (ViewGroup) rv.getParent(), false);
+
+        //找轮播图组件
+        banner = view.findViewById(R.id.banner);
+
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
 
         //找到日期文本控件
         TextView tv_day = view.findViewById(R.id.tv_day);
@@ -197,5 +237,30 @@ public class DiscoveryFragment extends BaseCommonFragment {
     @Override
     protected View getLayoutView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_discovery, null);
+    }
+
+    /**
+     * Banner框架显示图片的实现类
+     *
+     * 如果有其他位置用到
+     * 可以放到单独的文件中
+     */
+    private class GlideImageLoader extends ImageLoader {
+
+        /**
+         * 加载图片的方法
+         *
+         * @param context
+         * @param path
+         * @param imageView
+         */
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            //将对象转为广告对象
+            Ad banner = (Ad) path;
+
+            //使用工具类方法显示图片
+            ImageUtil.show(getMainActivity(), imageView, banner.getBanner());
+        }
     }
 }

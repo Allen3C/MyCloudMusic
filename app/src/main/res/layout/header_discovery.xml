@@ -28,11 +28,10 @@
             app:cardElevation="0dp">
 
             <!--轮播图-->
-            <ImageView
-                android:scaleType="centerCrop"
-                android:src="@drawable/dnf"
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/banner_height" />
+                android:layout_height="@dimen/banner_height"/>
 
         </androidx.cardview.widget.CardView>
 
