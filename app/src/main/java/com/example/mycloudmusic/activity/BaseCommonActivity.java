@@ -3,6 +3,7 @@ package com.example.mycloudmusic.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -115,6 +116,20 @@ public class BaseCommonActivity extends BaseActivity {
         Intent intent = new Intent(getMainActivity(), clazz);
         startActivity(intent);
     }
+
+    /**
+     * 启动界面，可以传递一个字符串参数
+     * @param clazz
+     * @param id
+     */
+    protected void startActivityExtraId(Class<?> clazz, String id){
+        Intent intent = new Intent(getMainActivity(), clazz);
+        if(!TextUtils.isEmpty(id)){
+            intent.putExtra(Constant.ID, id);
+            startActivity(intent);
+        }
+    }
+
     /**
      * 启动界面并关闭当前界面
      * @param clazz
@@ -123,6 +138,14 @@ public class BaseCommonActivity extends BaseActivity {
         startActivity(clazz);
         //关闭当前界面，就是跳转之后按导航栏的返回回不到当前界面了
         finish();
+    }
+
+    /**
+     * 获取字符串类型ID
+     * @return
+     */
+    protected String extraId(){
+        return extraString(Constant.ID);
     }
 
     /**

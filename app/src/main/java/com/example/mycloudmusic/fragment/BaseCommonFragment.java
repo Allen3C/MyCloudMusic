@@ -2,8 +2,10 @@ package com.example.mycloudmusic.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.example.mycloudmusic.activity.BaseCommonActivity;
+import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.PreferenceUtil;
 
 import butterknife.ButterKnife;
@@ -44,6 +46,18 @@ public abstract class BaseCommonFragment extends BaseFragment {
     protected void startActivity(Class<?> clazz){
         Intent intent = new Intent(getMainActivity(), clazz);
         startActivity(intent);
+    }
+    /**
+     * 启动界面，可以传递一个字符串参数
+     * @param clazz
+     * @param id
+     */
+    protected void startActivityExtraId(Class<?> clazz, String id){
+        Intent intent = new Intent(getMainActivity(), clazz);
+        if(!TextUtils.isEmpty(id)){
+            intent.putExtra(Constant.ID, id);
+            startActivity(intent);
+        }
     }
     /**
      * 启动界面并关闭当前界面
