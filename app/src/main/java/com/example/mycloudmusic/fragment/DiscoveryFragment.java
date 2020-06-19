@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.activity.WebViewActivity;
 import com.example.mycloudmusic.adapter.DiscoveryAdapter;
 import com.example.mycloudmusic.domain.Ad;
 import com.example.mycloudmusic.domain.BaseMultiItemEntity;
@@ -28,6 +29,7 @@ import com.example.mycloudmusic.network.Api;
 import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 import com.youth.banner.loader.ImageLoaderInterface;
 
@@ -41,7 +43,7 @@ import io.reactivex.Observable;
 /**
  * 首页-“发现”界面
  */
-public class DiscoveryFragment extends BaseCommonFragment {
+public class DiscoveryFragment extends BaseCommonFragment implements OnBannerListener {
 
     private static final String TAG = "DiscoveryFragment";
     @BindView(R.id.rv)
@@ -150,6 +152,9 @@ public class DiscoveryFragment extends BaseCommonFragment {
         //找轮播图组件
         banner = view.findViewById(R.id.banner);
 
+        //设置点击监听器
+        banner.setOnBannerListener(this);
+
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
 
@@ -237,6 +242,18 @@ public class DiscoveryFragment extends BaseCommonFragment {
     @Override
     protected View getLayoutView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_discovery, null);
+    }
+
+    /**
+     * 轮播图点击回调
+     * @param position
+     */
+    @Override
+    public void OnBannerClick(int position) {
+        //获取点击的广告对象
+        Ad ad = bannerData.get(position);
+        //使用通用的WebView界面显示
+        WebViewActivity.start(getMainActivity(), "活动详情", ad.getUri());
     }
 
     /**
