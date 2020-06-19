@@ -216,4 +216,7 @@ dependencies {
     //封装了RecyclerView
     //提供更高层次的接口
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+
+    //轮播图
+    implementation 'com.youth.banner:banner:1.4.10'
 }
