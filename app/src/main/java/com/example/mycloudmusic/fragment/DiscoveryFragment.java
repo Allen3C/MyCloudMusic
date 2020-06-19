@@ -1,6 +1,7 @@
 package com.example.mycloudmusic.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.activity.SheetDetailActivity;
 import com.example.mycloudmusic.activity.WebViewActivity;
 import com.example.mycloudmusic.adapter.DiscoveryAdapter;
 import com.example.mycloudmusic.domain.Ad;
@@ -26,6 +28,7 @@ import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.domain.response.ListResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
 import com.example.mycloudmusic.network.Api;
+import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
 import com.youth.banner.Banner;
@@ -93,6 +96,37 @@ public class DiscoveryFragment extends BaseCommonFragment implements OnBannerLis
 
         //请求轮播图数据
         fetchBannerData();
+    }
+
+    @Override
+    protected void initListeners() {
+        super.initListeners();
+        //设置Item点击事件
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            /**
+             * 点击Item会回调
+             * @param adapter
+             * @param view
+             * @param position
+             */
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                //获取点击的数据
+                Object data = adapter.getItem(position);
+                //判断类型
+                if(data instanceof Sheet){
+                    //歌单
+                    Sheet sheet = (Sheet) data;
+                    //创建Intent
+                    Intent intent = new Intent(getMainActivity(), SheetDetailActivity.class);
+                    //传递ID
+                    //这样详情界面才知道点击的是哪个歌单
+                    intent.putExtra(Constant.ID, sheet.getId());
+                    //启动界面
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void fetchBannerData() {

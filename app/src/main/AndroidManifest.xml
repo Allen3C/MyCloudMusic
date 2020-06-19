@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.SheetDetailActivity"
+            android:label="@string/activity_sheet_detail">
+        </activity>
         <activity android:name=".activity.SettingActivity"
             android:label="@string/setting"></activity>
         <activity android:name=".activity.WebViewActivity" />
