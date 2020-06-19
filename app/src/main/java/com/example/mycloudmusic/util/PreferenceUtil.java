@@ -26,7 +26,8 @@ public class PreferenceUtil {
 
     public PreferenceUtil(Context context) {
         //保存上下文
-        this.context = context.getApplicationContext();
+        //this.context = context.getApplicationContext();
+        this.context = context;
         //获取偏好设置
         sharedPreferences = this.context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
 
