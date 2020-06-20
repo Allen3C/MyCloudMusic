@@ -79,7 +79,9 @@
     <string name="collection_all">收藏(%1$d)</string>
     <string name="cancel_success">取消成功</string>
     <string name="collection_success">收藏成功</string>
-
+    <string name="search">搜索</string>
+    <string name="sort">排序</string>
+    <string name="report">举报</string>
 
 
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--搜索按钮
+    每一个Item就是按钮
+        orderInCategory：排序；越小约靠前
+
+        showAsAction：显示方式
+        always：不折叠，始终显示；显示图标
+        collapseActionView：折叠到更多；折叠的只显示标题
+        由于这是项目课程
+        其他值就不讲解了-->
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:showAsAction="always" />
+
+    <!--排序-->
+    <item
+        android:id="@+id/action_sort"
+        android:title="@string/sort"
+        android:orderInCategory="100"
+        app:showAsAction="collapseActionView" />
+
+    <!--举报-->
+    <item
+        android:id="@+id/action_report"
+        android:title="@string/report"
+        android:orderInCategory="200"
+        app:showAsAction="collapseActionView" />
+
+</menu>
