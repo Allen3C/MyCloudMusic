@@ -5,6 +5,7 @@ import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,6 +55,13 @@ public class SheetDetailActivity extends BaseTitleActivity {
         //设置布局管理器
         LinearLayoutManager layoutManager = new LinearLayoutManager(getMainActivity());
         rv.setLayoutManager(layoutManager);
+
+//        //分割线
+//        DividerItemDecoration decoration = new DividerItemDecoration(getMainActivity(), RecyclerView.VERTICAL);
+//
+//        //添加到控件
+//        //可以添加多个
+//        rv.addItemDecoration(decoration);
     }
 
     @Override
