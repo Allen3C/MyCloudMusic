@@ -54,7 +54,7 @@
             android:layout_height="@dimen/item_song_height"
             android:background="@null"
             android:scaleType="center"
-            android:src="@drawable/dnf" />
+            android:src="@drawable/ic_more_grey" />
     </LinearLayout>
 
     <!--分割线-->
