@@ -7,6 +7,8 @@ import com.example.mycloudmusic.util.LoadingUtil;
 import com.example.mycloudmusic.util.LogUtil;
 
 import io.reactivex.disposables.Disposable;
+import retrofit2.Response;
+
 
 /**
  * 网络请求Observer
@@ -94,7 +96,21 @@ public abstract class HttpObserver<T> extends ObserverAdapter<T> {
      * @return
      */
     private boolean isSucceeded(T t) {
-        if (t instanceof BaseResponse) {
+        if(t instanceof Response){
+            //retrofit里面的响应对象
+
+            //获取响应对象
+            Response response = (Response) t;
+            //获取相应码
+            int code = response.code();
+            //判断相应码
+            if(code >= 200 && code <= 299){
+                //网络请求正常
+                return true;
+            }
+
+        }
+        else if (t instanceof BaseResponse) {
             //判断具体业务请求是否成功
             BaseResponse response = (BaseResponse) t;
             //状态码为0表示成功

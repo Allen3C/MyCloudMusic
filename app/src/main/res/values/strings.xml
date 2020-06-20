@@ -75,5 +75,7 @@
     <string name="select">多选</string>
     <string name="cancel_collection_all">取消(%1$d)</string>
     <string name="collection_all">收藏(%1$d)</string>
+    <string name="cancel_success">取消成功</string>
+    <string name="collection_success">收藏成功</string>
 
 </resources>

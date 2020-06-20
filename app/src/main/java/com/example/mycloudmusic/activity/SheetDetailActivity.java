@@ -35,12 +35,14 @@ import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.ResourceUtil;
+import com.example.mycloudmusic.util.ToastUtil;
 import com.github.florent37.glidepalette.BitmapPalette;
 import com.github.florent37.glidepalette.GlidePalette;
 
 import org.apache.commons.lang3.StringUtils;
 
 import butterknife.BindView;
+import retrofit2.Response;
 
 /**
  * 歌单详情界面
@@ -449,6 +451,41 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
      */
     private void processCollectionClick() {
         LogUtil.d(TAG, "processCollectionClick");
+        if (data.isCollection()) {
+            //已经收藏了
+
+            //取消收藏
+            Api.getInstance()
+                    .deleteCollect(data.getId())
+                    .subscribe(new HttpObserver<Response<Void>>() {
+                        @Override
+                        public void onSucceeded(Response<Void> data) {
+                            //弹出提示
+                            ToastUtil.successShortToast(R.string.cancel_success);
+
+                            //重新加载数据
+                            //目的是显示新的收藏状态
+                            fetchData();
+                        }
+                    });
+        } else {
+            //没有收藏
+
+            //收藏
+            Api.getInstance()
+                    .collect(data.getId())
+                    .subscribe(new HttpObserver<Response<Void>>() {
+                        @Override
+                        public void onSucceeded(Response<Void> data) {
+                            //弹出提示
+                            ToastUtil.successShortToast(R.string.collection_success);
+
+                            //重新加载数据
+                            //目的是显示新的收藏状态
+                            fetchData();
+                        }
+                    });
+        }
     }
 }
 

@@ -10,6 +10,7 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 import retrofit2.HttpException;
+import retrofit2.Response;
 
 /**
  * 网络请求相关工具类
@@ -34,22 +35,26 @@ public class HttpUtil {
                 HttpException exception = (HttpException) error;
                 //获取响应码
                 int code = exception.code();
-                if (code == 401) {
-                    ToastUtil.errorShortToast(R.string.error_network_not_auth);
-                } else if (code == 403) {
-                    ToastUtil.errorShortToast(R.string.error_network_not_permission);
-                } else if (code == 404) {
-                    ToastUtil.errorShortToast(R.string.error_network_not_found);
-                } else if (code >= 500) {
-                    ToastUtil.errorShortToast(R.string.error_network_server);
-                } else {
-                    ToastUtil.errorShortToast(R.string.error_network_unknown);
-                }
+                handleHttpError(code);
             } else {
                 ToastUtil.errorShortToast(R.string.error_network_unknown);
             }
         }else{
-            if(data instanceof BaseResponse){
+            if(data instanceof Response){
+                //retrofit里面的响应对象
+
+                //获取响应对象
+                Response response = (Response) data;
+                //获取相应码
+                int code = response.code();
+                //判断相应码
+                if(code >= 200 && code <= 299){
+                    //网络请求正常
+                }else{
+                    handleHttpError(code);
+                }
+            }
+            else if(data instanceof BaseResponse){
                 //判断具体业务请求是否成功
                 BaseResponse response = (BaseResponse) data;
                 if(StringUtils.isBlank(response.getMessage())){
@@ -60,6 +65,20 @@ public class HttpUtil {
                     ToastUtil.errorShortToast(response.getMessage());
                 }
             }
+        }
+    }
+
+    private static void handleHttpError(int code) {
+        if (code == 401) {
+            ToastUtil.errorShortToast(R.string.error_network_not_auth);
+        } else if (code == 403) {
+            ToastUtil.errorShortToast(R.string.error_network_not_permission);
+        } else if (code == 404) {
+            ToastUtil.errorShortToast(R.string.error_network_not_found);
+        } else if (code >= 500) {
+            ToastUtil.errorShortToast(R.string.error_network_server);
+        } else {
+            ToastUtil.errorShortToast(R.string.error_network_unknown);
         }
     }
 }
