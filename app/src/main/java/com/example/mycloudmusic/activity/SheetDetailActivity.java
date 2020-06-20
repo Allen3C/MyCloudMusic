@@ -448,12 +448,15 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
                 processCollectionClick();
                 break;
             case R.id.ll_comment_container:
-                //评论容器点击了
-                Intent intent = new Intent(getMainActivity(), CommentActivity.class);
-                //添加歌单ID
-                intent.putExtra(Constant.SHEET_ID, data.getId());
-                //启动界面
-                startActivity(intent);
+//                //评论容器点击了
+//                Intent intent = new Intent(getMainActivity(), CommentActivity.class);
+//                //添加歌单ID
+//                intent.putExtra(Constant.SHEET_ID, data.getId());
+//                //启动界面
+//                startActivity(intent);
+
+                //使用重构的方法
+                CommentActivity.start(getMainActivity(),data.getId());
                 break;
         }
     }
