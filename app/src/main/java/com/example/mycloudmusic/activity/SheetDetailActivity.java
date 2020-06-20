@@ -45,7 +45,7 @@ import butterknife.BindView;
 /**
  * 歌单详情界面
  */
-public class SheetDetailActivity extends BaseTitleActivity {
+public class SheetDetailActivity extends BaseTitleActivity implements View.OnClickListener {
 
     private static final String TAG = "SheetDetailActivity";
 
@@ -157,6 +157,14 @@ public class SheetDetailActivity extends BaseTitleActivity {
         rv.setAdapter(adapter);
 
         fetchData();
+    }
+
+    @Override
+    protected void initListeners() {
+        super.initListeners();
+        //收藏按钮单击事件
+        bt_collection.setOnClickListener(this);
+
     }
 
     private void fetchData() {
@@ -419,6 +427,28 @@ public class SheetDetailActivity extends BaseTitleActivity {
             //将文字颜色设置为白色
             bt_collection.setTextColor(getResources().getColorStateList(R.drawable.selector_text_color_primary_reverse));
         }
+    }
+
+    /**
+     * 按钮点击回调方法
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_collection:
+                //收藏歌单按钮点击了
+                processCollectionClick();
+                break;
+        }
+    }
+
+    /**
+     * 处理收藏和取消收藏逻辑
+     */
+    private void processCollectionClick() {
+        LogUtil.d(TAG, "processCollectionClick");
     }
 }
 
