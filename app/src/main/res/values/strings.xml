@@ -68,5 +68,8 @@
     <string name="day_recommend">每日推荐</string>
     <string name="sheet">歌单</string>
     <string name="rank">排行榜</string>
+    <!--歌单详情相关-->
+    <string name="play_all">播放全部</string>
+    <string name="music_count">(共%1$d首)</string>
 
 </resources>
