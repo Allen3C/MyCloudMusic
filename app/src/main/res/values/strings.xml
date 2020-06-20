@@ -7,6 +7,7 @@
     <!-- activity标题 -->
     <string name="activity_forget_password">找回密码</string>
     <string name="activity_sheet_detail">歌单详情</string>
+    <string name="activity_conmment">评论</string>
     <!-- 登录注册相关 -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">登录</string>
@@ -77,5 +78,6 @@
     <string name="collection_all">收藏(%1$d)</string>
     <string name="cancel_success">取消成功</string>
     <string name="collection_success">收藏成功</string>
+
 
 </resources>
