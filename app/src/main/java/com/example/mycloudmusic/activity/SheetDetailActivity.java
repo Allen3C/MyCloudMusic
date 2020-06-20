@@ -67,6 +67,7 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
     private LinearLayout ll_header;
     private ImageView iv_banner;
     private TextView tv_title;
+
     private ImageView iv_avatar;
     private TextView tv_nickname;
     private LinearLayout ll_comment_container;
@@ -74,6 +75,7 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
     private Button bt_collection;
     private LinearLayout ll_play_all_container;
     private TextView tv_count;
+    private LinearLayout ll_user;
 
 
     @Override
@@ -117,6 +119,9 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
 
         //标题
         tv_title = view.findViewById(R.id.tv_title);
+
+        //用户容器
+        ll_user = view.findViewById(R.id.ll_user);
 
         //歌单创建者头像
         iv_avatar = view.findViewById(R.id.iv_avatar);
@@ -165,6 +170,9 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
     @Override
     protected void initListeners() {
         super.initListeners();
+        //用户点击事件
+        ll_user.setOnClickListener(this);
+
         //收藏按钮单击事件
         bt_collection.setOnClickListener(this);
 
@@ -457,6 +465,10 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
 
                 //使用重构的方法
                 CommentActivity.start(getMainActivity(),data.getId());
+                break;
+            case R.id.ll_user:
+                //用户容器点击
+                startActivityExtraId(UserDetailActivity.class, data.getUser().getId());
                 break;
         }
     }

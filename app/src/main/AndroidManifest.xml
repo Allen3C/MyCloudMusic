@@ -16,6 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.UserDetailActivity"
+            android:label="@string/activity_user_detail"/>
         <activity android:name=".activity.CommentActivity"
             android:label="@string/activity_conmment"/>
         <activity android:name=".activity.SheetDetailActivity"

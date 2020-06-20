@@ -43,6 +43,7 @@
 
             <!--右侧容器-->
             <LinearLayout
+                android:id="@+id/ll_user"
                 android:layout_marginLeft="@dimen/padding_large"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
