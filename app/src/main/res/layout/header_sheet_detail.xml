@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
+    android:id="@+id/ll_header"
     android:orientation="vertical">
 
     <!--垂直方向上容器-->
@@ -32,11 +33,11 @@
 
                 <!--封面图-->
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/iv_banner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/dnf" />
+                    tools:src="@drawable/dnf" />
 
             </androidx.cardview.widget.CardView>
 
@@ -49,11 +50,12 @@
 
                 <!--标题-->
                 <TextView
+                    android:id="@+id/tv_title"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_large"
-                    android:text="这是歌单名称，这是歌单名称这是歌单名称这是歌单名称这是歌单名称这是歌单名称这是歌单名称"
+                    tools:text="这是歌单名称，这是歌单名称这是歌单名称这是歌单名称这是歌单名称这是歌单名称这是歌单名称"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -66,15 +68,17 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:id="@+id/iv_avatar"
                         android:scaleType="centerCrop"
                         tools:src="@drawable/dnf"
                         android:layout_width="@dimen/avatar_width_meddle"
                         android:layout_height="@dimen/avatar_width_meddle" />
 
                     <TextView
+                        android:id="@+id/tv_nickname"
                         android:layout_marginLeft="@dimen/padding_middle"
                         android:textColor="@color/tab_normal"
-                        android:text="这是昵称这是昵称"
+                        tools:text="这是昵称这是昵称"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -89,6 +93,7 @@
 
             <!--按钮容器-->
             <LinearLayout
+                android:id="@+id/ll_comment_container"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -103,6 +108,7 @@
 
                 <!--文本-->
                 <TextView
+                    android:id="@+id/tv_comment_count"
                     android:textColor="@color/white"
                     android:text="0"
                     android:layout_width="wrap_content"
@@ -148,7 +154,7 @@
                 <!--文本-->
                 <TextView
                     android:textColor="@color/white"
-                    android:text="0"
+                    android:text="@string/download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -169,7 +175,7 @@
 
                 <!--文本-->
                 <TextView
-                    android:text="0"
+                    android:text="@string/select"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -181,6 +187,7 @@
 
     <!--水平容器-->
     <LinearLayout
+        android:id="@+id/ll_play_all_container"
         android:gravity="center_vertical"
         android:background="@color/white"
         android:orientation="horizontal"
@@ -204,6 +211,7 @@
 
         <!--音乐数量-->
         <TextView
+            android:id="@+id/tv_count"
             android:text="@string/music_count"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -211,6 +219,7 @@
 
         <!--收藏按钮-->
         <Button
+            android:id="@+id/bt_collection"
             android:background="@null"
             android:layout_marginRight="@dimen/padding_middle"
             android:text="收藏"
