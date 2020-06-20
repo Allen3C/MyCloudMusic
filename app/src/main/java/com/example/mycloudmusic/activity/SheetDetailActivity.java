@@ -2,6 +2,8 @@ package com.example.mycloudmusic.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,6 +66,19 @@ public class SheetDetailActivity extends BaseTitleActivity {
 //        rv.addItemDecoration(decoration);
     }
 
+    /**
+     * 创建头部
+     *
+     * @return
+     */
+    private View createHeaderView() {
+        //从XML创建View
+        View view = getLayoutInflater().inflate(R.layout.header_sheet_detail, (ViewGroup) rv.getParent(), false);
+
+        //返回View
+        return view;
+    }
+
     @Override
     protected void initDatum() {
         super.initDatum();
@@ -73,6 +88,9 @@ public class SheetDetailActivity extends BaseTitleActivity {
 
         //创建适配器
         adapter = new SongAdapter(R.layout.item_song_detail);
+
+        //添加头部
+        adapter.addHeaderView(createHeaderView());
 
         //设置适配器
         rv.setAdapter(adapter);

@@ -28,7 +28,7 @@ public class SongAdapter extends BaseQuickAdapter<Song, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Song data) {
         //显示位置
-        helper.setText(R.id.tv_position, String.valueOf(helper.getAdapterPosition() + 1));
+        helper.setText(R.id.tv_position, String.valueOf(helper.getAdapterPosition()));
 
         //显示标题
         helper.setText(R.id.tv_title, data.getTitle());
