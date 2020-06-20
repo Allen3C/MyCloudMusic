@@ -222,7 +222,6 @@
             android:id="@+id/bt_collection"
             android:background="@null"
             android:layout_marginRight="@dimen/padding_middle"
-            android:text="收藏"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height_small" />
     </LinearLayout>

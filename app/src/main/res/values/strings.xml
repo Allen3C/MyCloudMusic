@@ -73,5 +73,7 @@
     <string name="music_count">(共%1$d首)</string>
     <string name="download">下载</string>
     <string name="select">多选</string>
+    <string name="cancel_collection_all">取消(%1$d)</string>
+    <string name="collection_all">收藏(%1$d)</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.mycloudmusic.activity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -383,6 +384,41 @@ public class SheetDetailActivity extends BaseTitleActivity {
 
         //音乐数
         tv_count.setText(getResources().getString(R.string.music_count, data.getSongs_count()));
+
+        //显示收藏状态
+        showCollectionStatus();
+    }
+
+    /**
+     * 显示收藏状态
+     */
+    @SuppressLint("ResourceType")
+    private void showCollectionStatus() {
+        if (data.isCollection()) {
+            //收藏了
+
+            //将按钮文字改为取消
+            bt_collection.setText(getResources().getString(R.string.cancel_collection_all,data.getCollections_count()));
+
+            //弱化取消收藏按钮
+            //因为我们的本质是想让用户收藏歌单
+            //所以去掉背景
+            bt_collection.setBackground(null);
+
+            //设置文字颜色为灰色
+            bt_collection.setTextColor(getResources().getColor(R.color.light_grey));
+        } else {
+            //没有收藏
+
+            //将按钮文字改为收藏
+            bt_collection.setText(getResources().getString(R.string.collection_all,data.getCollections_count()));
+
+            //设置按钮颜色为主色调
+            bt_collection.setBackgroundResource(R.drawable.selector_color_primary);
+
+            //将文字颜色设置为白色
+            bt_collection.setTextColor(getResources().getColorStateList(R.drawable.selector_text_color_primary_reverse));
+        }
     }
 }
 
