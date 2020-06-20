@@ -34,6 +34,8 @@ import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.ResourceUtil;
+import com.github.florent37.glidepalette.BitmapPalette;
+import com.github.florent37.glidepalette.GlidePalette;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -194,7 +196,104 @@ public class SheetDetailActivity extends BaseTitleActivity {
 //        }
 
 
-        //使用Palette获取封面颜色
+//        //使用Palette获取封面颜色
+//        if (StringUtils.isBlank(data.getBanner())) {
+//            //图片为空
+//
+//            //使用默认图片
+//            iv_banner.setImageResource(R.drawable.dnf);
+//        } else {
+//            //有图片
+//
+//            //这是一个典型的构建者模式
+//            //由于这是项目课程
+//            //所以这里不详细讲解设计模式
+//            Glide.with(this)
+//                    .asBitmap()
+//                    .load(ResourceUtil.resourceUri(data.getBanner()))
+//
+//                    //加载图片到自定义目标
+//                    //为什么是自定义目标
+//                    //是因为我们要获取Bitmap
+//                    //然后获取Bitmap的一些颜色
+//                    .into(new CustomTarget<Bitmap>() {
+//
+//                        /**
+//                         * 资源加载完成调用
+//                         *
+//                         * @param resource
+//                         * @param transition
+//                         */
+//                        @Override
+//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                            //显示封面
+//                            iv_banner.setImageBitmap(resource);
+//
+//                            //在Material Design(MD，材料设计，是Google的一门设计语言)的设计中
+//                            //所谓的设计语言就是一些设计规范
+//                            //目前Google已经应用到Android，Gmail等产品
+//
+//                            //推荐我们将应用的状态栏
+//                            //标题栏的颜色和当前页面的内容融合
+//                            //也就说当前页面显示一张红色的图片
+//                            //那么最好状态栏，标题栏的颜色也和红色差不多
+//                            //实现这种效果可以借助的Palette类。
+//                            //Palette:可以翻译为调色板
+//                            //功能是可以从图片中获取一些颜色
+//                            //详细的可以学习《详解Material Design，http://www.ixuea.com/courses/9》课程
+//                            Palette.from(resource)
+//                                    .generate(new Palette.PaletteAsyncListener() {
+//
+//                                        /**
+//                                         * 颜色计算完成了
+//                                         * @param palette
+//                                         */
+//                                        @Override
+//                                        public void onGenerated(@Nullable Palette palette) {
+//                                            //获取 有活力 的颜色
+//                                            Palette.Swatch swatch = palette.getVibrantSwatch();
+//
+//                                            //可能没有值所以要判断
+//                                            if (swatch != null) {
+//                                                //获取颜色的rgb
+//                                                int rgb = swatch.getRgb();
+//
+//                                                //设置标题颜色
+//                                                toolbar.setBackgroundColor(rgb);
+//
+//                                                //设置头部容器颜色
+//                                                ll_header.setBackgroundColor(rgb);
+//
+//                                                //这些api只有高版本才有
+//                                                //所以说要判断
+//                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                                                    //设置状态栏颜色
+//                                                    Window window = getWindow();
+//
+//                                                    window.setStatusBarColor(rgb);
+//
+//                                                    //设置导航栏颜色
+//                                                    window.setNavigationBarColor(rgb);
+//                                                }
+//                                            }
+//                                        }
+//                                    });
+//                        }
+//
+//                        /**
+//                         * 加载任务取消了
+//                         * 可以在这里释放我们定义的一些资源
+//                         *
+//                         * @param placeholder
+//                         */
+//                        @Override
+//                        public void onLoadCleared(@Nullable Drawable placeholder) {
+//
+//                        }
+//                    });
+//        }
+
+        //使用GlidePalette获取封面颜色
         if (StringUtils.isBlank(data.getBanner())) {
             //图片为空
 
@@ -203,92 +302,71 @@ public class SheetDetailActivity extends BaseTitleActivity {
         } else {
             //有图片
 
-            //这是一个典型的构建者模式
-            //由于这是项目课程
-            //所以这里不详细讲解设计模式
-            Glide.with(this)
-                    .asBitmap()
-                    .load(ResourceUtil.resourceUri(data.getBanner()))
+            //获取图片绝对路径
+            String uri = ResourceUtil.resourceUri(data.getBanner());
 
-                    //加载图片到自定义目标
-                    //为什么是自定义目标
-                    //是因为我们要获取Bitmap
-                    //然后获取Bitmap的一些颜色
-                    .into(new CustomTarget<Bitmap>() {
+            //加载
+            GlidePalette<Drawable> glidePalette = GlidePalette
 
-                        /**
-                         * 资源加载完成调用
-                         *
-                         * @param resource
-                         * @param transition
-                         */
+                    //再把地址传到GlidePalette
+                    .with(uri)
+
+                    //使用VIBRANT颜色样板
+                    .use(GlidePalette.Profile.VIBRANT)
+
+                    //设置到控件背景
+                    .intoBackground(toolbar, GlidePalette.Swatch.RGB)
+                    .intoBackground(ll_header, GlidePalette.Swatch.RGB)
+
+                    //设置回调
+                    //用回调的目的是
+                    //要设置状态栏和导航栏
+                    .intoCallBack(new BitmapPalette.CallBack() {
                         @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            //显示封面
-                            iv_banner.setImageBitmap(resource);
+                        public void onPaletteLoaded(@Nullable Palette palette) {
+                            //获取 有活力 的颜色
+                            Palette.Swatch swatch = palette.getVibrantSwatch();
 
-                            //在Material Design(MD，材料设计，是Google的一门设计语言)的设计中
-                            //所谓的设计语言就是一些设计规范
-                            //目前Google已经应用到Android，Gmail等产品
+                            //可能没有值所以要判断
+                            if (swatch != null) {
+                                //获取颜色的rgb
+                                int rgb = swatch.getRgb();
 
-                            //推荐我们将应用的状态栏
-                            //标题栏的颜色和当前页面的内容融合
-                            //也就说当前页面显示一张红色的图片
-                            //那么最好状态栏，标题栏的颜色也和红色差不多
-                            //实现这种效果可以借助的Palette类。
-                            //Palette:可以翻译为调色板
-                            //功能是可以从图片中获取一些颜色
-                            //详细的可以学习《详解Material Design，http://www.ixuea.com/courses/9》课程
-                            Palette.from(resource)
-                                    .generate(new Palette.PaletteAsyncListener() {
+                                //这些api只有高版本才有
+                                //所以说要判断
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    //设置状态栏颜色
+                                    Window window = getWindow();
 
-                                        /**
-                                         * 颜色计算完成了
-                                         * @param palette
-                                         */
-                                        @Override
-                                        public void onGenerated(@Nullable Palette palette) {
-                                            //获取 有活力 的颜色
-                                            Palette.Swatch swatch = palette.getVibrantSwatch();
+                                    window.setStatusBarColor(rgb);
 
-                                            //可能没有值所以要判断
-                                            if (swatch != null) {
-                                                //获取颜色的rgb
-                                                int rgb = swatch.getRgb();
-
-                                                //设置标题颜色
-                                                toolbar.setBackgroundColor(rgb);
-
-                                                //设置头部容器颜色
-                                                ll_header.setBackgroundColor(rgb);
-
-                                                //这些api只有高版本才有
-                                                //所以说要判断
-                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                                    //设置状态栏颜色
-                                                    Window window = getWindow();
-
-                                                    window.setStatusBarColor(rgb);
-
-                                                    //设置导航栏颜色
-                                                    window.setNavigationBarColor(rgb);
-                                                }
-                                            }
-                                        }
-                                    });
+                                    //设置导航栏颜色
+                                    window.setNavigationBarColor(rgb);
+                                }
+                            }
                         }
+                    })
 
-                        /**
-                         * 加载任务取消了
-                         * 可以在这里释放我们定义的一些资源
-                         *
-                         * @param placeholder
-                         */
-                        @Override
-                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                    //淡入
+                    //只有第一次效果很明显
+                    //由于这里是项目课程
+                    //所以就不在深入查看是为什么了
+                    //如果大家感兴趣可以深入查看
+                    //搞懂了也可以在群里分享给大家
+                    .crossfade(true);
 
-                        }
-                    });
+
+            //使用Glide
+            Glide.with(getMainActivity())
+
+                    //加载图片
+                    .load(uri)
+
+                    //加载完成监听器
+                    .listener(glidePalette)
+
+                    //将图片设置到图片控件
+                    .into(iv_banner);
         }
 
         //显示标题
