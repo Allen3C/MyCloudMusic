@@ -121,6 +121,9 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
         //设置播放监听器
         musicPlayerManager.addMusicPlayerListener(this);
 
+        //显示播放进度
+        showProgress();
+
         //显示音乐时长
         showDuration();
 
@@ -288,6 +291,19 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
         sb_progress.setMax((int) end);
     }
 
+    /**
+     * 显示播放进度
+     */
+    private void showProgress() {
+        //获取播放进度
+        long progress = musicPlayerManager.getData().getProgress();
+        //格式化进度
+        tv_start.setText(TimeUtil.formatMinuteSecond((int) progress));
+
+        //设置到进度条
+        sb_progress.setProgress((int) progress);
+    }
+
     //播放管理器监听器
     @Override
     public void onPaused(Song data) {
@@ -313,6 +329,8 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     @Override
     public void onProgress(Song data) {
         LogUtil.d(TAG, "onProgress:" + data.getProgress() + "," + data.getDuration());
+
+        showProgress();
     }
     //end 播放管理器监听器
 }
