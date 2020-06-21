@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.adapter.SongAdapter;
 import com.example.mycloudmusic.domain.Sheet;
@@ -180,6 +181,14 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
 
         //评论点击事件
         ll_comment_container.setOnClickListener(this);
+
+        //设置item点击事件
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                SimplePlayerActivity.start(getMainActivity());
+            }
+        });
 
     }
 
