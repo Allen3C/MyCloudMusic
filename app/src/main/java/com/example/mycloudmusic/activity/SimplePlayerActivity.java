@@ -274,6 +274,20 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
         }
     }
 
+    /**
+     * 显示时长
+     */
+    private void showDuration() {
+        //获取当前正在播放的音乐
+        long end = musicPlayerManager.getData().getDuration();
+
+        //将毫秒格式化为分钟:秒
+        tv_end.setText(TimeUtil.formatMinuteSecond((int) end));
+
+        //设置到进度条
+        sb_progress.setMax((int) end);
+    }
+
     //播放管理器监听器
     @Override
     public void onPaused(Song data) {
@@ -296,18 +310,9 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
         showDuration();
     }
 
-    /**
-     * 显示时长
-     */
-    private void showDuration() {
-        //获取当前正在播放的音乐
-        long end = musicPlayerManager.getData().getDuration();
-
-        //将毫秒格式化为分钟:秒
-        tv_end.setText(TimeUtil.formatMinuteSecond((int) end));
-
-        //设置到进度条
-        sb_progress.setMax((int) end);
+    @Override
+    public void onProgress(Song data) {
+        LogUtil.d(TAG, "onProgress:" + data.getProgress() + "," + data.getDuration());
     }
     //end 播放管理器监听器
 }

@@ -70,10 +70,20 @@ public class Constant {
     /**
      * 歌单
      */
+
     public static final int TYPE_SHEET = 1;
     /**
      * 单曲
      */
     public static final int TYPE_SONG = 2;
 
+    /**
+     * 播放进度通知
+     */
+    public static final int MESSAGE_PROGRESS = 0;
+
+    /**
+     * 音乐通知进度回调间隔16ms
+     */
+    public static final long DEFAULT_TIME = 16;
 }
