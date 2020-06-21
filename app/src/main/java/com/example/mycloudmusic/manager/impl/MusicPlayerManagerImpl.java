@@ -4,8 +4,10 @@ import android.content.Context;
 import android.media.MediaPlayer;
 
 import com.example.mycloudmusic.domain.Song;
+import com.example.mycloudmusic.listener.Consumer;
 import com.example.mycloudmusic.listener.MusicPlayerListener;
 import com.example.mycloudmusic.manager.MusicPlayerManager;
+import com.example.mycloudmusic.util.ListUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,18 +104,33 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
      * 发布播放中状态
      */
     private void publishPlayingStatus() {
-        for (MusicPlayerListener listener : listeners) {
-            listener.onPlaying(data);
-        }
+//        for (MusicPlayerListener listener : listeners) {
+//            listener.onPlaying(data);
+//        }
+        //使用重构后的方法
+        ListUtil.eachListener(listeners, new Consumer<MusicPlayerListener>() {
+            @Override
+            public void accept(MusicPlayerListener listener) {
+                listener.onPlaying(data);
+            }
+        });
     }
     /**
      * 发布暂停状态
      */
     private void publishPausedStatus() {
-        for (MusicPlayerListener listener : listeners) {
-            listener.onPaused(data);
-        }
+//        for (MusicPlayerListener listener : listeners) {
+//            listener.onPaused(data);
+//        }
+        //使用重构后的方法
+        ListUtil.eachListener(listeners, new Consumer<MusicPlayerListener>() {
+            @Override
+            public void accept(MusicPlayerListener listener) {
+                listener.onPaused(data);
+            }
+        });
     }
+
 
     @Override
     public boolean isPlaying() {
