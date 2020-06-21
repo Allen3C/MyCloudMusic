@@ -1,5 +1,7 @@
 package com.example.mycloudmusic.listener;
 
+import android.media.MediaPlayer;
+
 import com.example.mycloudmusic.domain.Song;
 
 /**
@@ -16,4 +18,10 @@ public interface MusicPlayerListener {
      */
     void onPlaying(Song data);
 
+    /**
+     * 播放器准备完毕
+     * @param mp
+     * @param data
+     */
+    void onPrepared(MediaPlayer mp, Song data);
 }

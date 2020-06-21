@@ -52,6 +52,19 @@ public class Song extends BaseMultiItemEntity {
      */
     private User singer;
 
+    //只有播放后才有值
+    /**
+     * 播放总进度
+     * 单位：ms
+     */
+    private long duration;
+
+    /**
+     * 播放进度
+     */
+    private long progress;
+    //end 只有播放后才有值
+
     public String getTitle() {
         return title;
     }
@@ -131,6 +144,22 @@ public class Song extends BaseMultiItemEntity {
     public Song setSinger(User singer) {
         this.singer = singer;
         return this;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public long getProgress() {
+        return progress;
+    }
+
+    public void setProgress(long progress) {
+        this.progress = progress;
     }
 
     /**
