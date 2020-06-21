@@ -4,9 +4,12 @@ import android.content.Context;
 import android.media.MediaPlayer;
 
 import com.example.mycloudmusic.domain.Song;
+import com.example.mycloudmusic.listener.MusicPlayerListener;
 import com.example.mycloudmusic.manager.MusicPlayerManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 播放管理器默认实现
@@ -26,6 +29,12 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
      * 当前播放的音乐对象
      */
     private Song data;
+
+    /**
+     * 播放器状态监听器
+     */
+    private List<MusicPlayerListener> listeners = new ArrayList<>();
+
 
     /**
      * 私有构造方法
@@ -81,8 +90,20 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
 
             //开始播放
             player.start();
+
+            //回调监听器
+            publishPlayingStatus();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 发布播放中状态
+     */
+    private void publishPlayingStatus() {
+        for (MusicPlayerListener listener : listeners) {
+            listener.onPlaying(data);
         }
     }
 
@@ -96,6 +117,9 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
         if (isPlaying()) {
             //如果在播放就暂停
             player.pause();
+
+            //回调监听器
+            publishPlayingStatus();
         }
     }
 
@@ -104,6 +128,9 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
         if (!isPlaying()) {
             //如果没有播放就播放
             player.start();
+
+            //回调监听器
+            publishPlayingStatus();
         }
     }
 }
