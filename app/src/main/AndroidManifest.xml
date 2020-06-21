@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mycloudmusic">
-    <!-- 网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 读存储卡权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 读存储卡权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AppContext"
@@ -16,17 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SimplePlayerActivity"
-            android:label="@string/activity_simple_player"/>
-        <activity android:name=".activity.UserDetailActivity"
-            android:label="@string/activity_user_detail"/>
-        <activity android:name=".activity.CommentActivity"
-            android:label="@string/activity_conmment"/>
-        <activity android:name=".activity.SheetDetailActivity"
-            android:label="@string/activity_sheet_detail">
-        </activity>
-        <activity android:name=".activity.SettingActivity"
-            android:label="@string/setting"></activity>
+        <!-- 播放音乐的服务 -->
+        <service
+            android:name=".service.MusicPlayerService"
+            android:enabled="true"
+            android:exported="false"
+            android:priority="1000"
+            android:persistent="true"></service>
+
+        <activity
+            android:name=".activity.SimplePlayerActivity"
+            android:label="@string/activity_simple_player" />
+        <activity
+            android:name=".activity.UserDetailActivity"
+            android:label="@string/activity_user_detail" />
+        <activity
+            android:name=".activity.CommentActivity"
+            android:label="@string/activity_conmment" />
+        <activity
+            android:name=".activity.SheetDetailActivity"
+            android:label="@string/activity_sheet_detail"></activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:label="@string/setting" />
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.AdActivity" />
         <activity
@@ -41,6 +52,7 @@
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

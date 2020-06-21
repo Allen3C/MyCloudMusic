@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.manager.MusicPlayerManager;
+import com.example.mycloudmusic.service.MusicPlayerService;
 import com.example.mycloudmusic.util.LogUtil;
 
 import butterknife.BindView;
@@ -67,6 +69,16 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_player);
+    }
+
+    @Override
+    protected void initDatum() {
+        super.initDatum();
+        //使用MusicPlayerService获取播放管理器
+        MusicPlayerManager o1 = MusicPlayerService.getMusicPlayerManager(getMainActivity());
+        MusicPlayerManager o2 = MusicPlayerService.getMusicPlayerManager(getMainActivity());
+        LogUtil.d(TAG, "" + (o1 == o2));
+
     }
 
     @Override
