@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.Song;
+import com.example.mycloudmusic.listener.MusicPlayerListener;
 import com.example.mycloudmusic.manager.MusicPlayerManager;
 import com.example.mycloudmusic.service.MusicPlayerService;
 import com.example.mycloudmusic.util.LogUtil;
@@ -25,7 +26,7 @@ import butterknife.OnClick;
 /**
  * 简单播放器实现
  */
-public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.OnSeekBarChangeListener {
+public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.OnSeekBarChangeListener, MusicPlayerListener {
     private static final String TAG = "SimplePlayerActivity";
     /**
      * 列表
@@ -105,6 +106,31 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
         super.initListeners();
         //设置进度条监听器
         sb_progress.setOnSeekBarChangeListener(this);
+    }
+
+    /**
+     * 进入了前台,界面可见
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtil.d(TAG, "onResume");
+
+        //设置播放监听器
+        musicPlayerManager.addMusicPlayerListener(this);
+
+        //显示播放状态
+        showMusicPlayStatus();
+    }
+    /**
+     * 进入了后台,界面不可见
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //取消播放器监听器
+        musicPlayerManager.removeMusicPlayerListener(this);
     }
 
     /**
@@ -217,4 +243,44 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     public void onStopTrackingTouch(SeekBar seekBar) {
         LogUtil.d(TAG, "onStopTrackingTouch");
     }
+
+
+    /**
+     * 显示播放状态
+     */
+    private void showPlayStatus() {
+        bt_play.setText("播放");
+    }
+    /**
+     * 显示暂停状态
+     */
+    private void showPauseStatus() {
+        bt_play.setText("暂停");
+    }
+
+    /**
+     * 显示音乐播放状态
+     */
+    private void showMusicPlayStatus(){
+        if (musicPlayerManager.isPlaying()){
+            showPauseStatus();
+        } else {
+            showPlayStatus();
+        }
+    }
+
+    //播放管理器监听器
+    @Override
+    public void onPaused(Song data) {
+        LogUtil.d(TAG, "onPaused");
+
+        showPlayStatus();
+    }
+    @Override
+    public void onPlaying(Song data) {
+        LogUtil.d(TAG, "onPlaying");
+
+        showPauseStatus();
+    }
+    //end 播放管理器监听器
 }

@@ -106,6 +106,14 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
             listener.onPlaying(data);
         }
     }
+    /**
+     * 发布暂停状态
+     */
+    private void publishPausedStatus() {
+        for (MusicPlayerListener listener : listeners) {
+            listener.onPaused(data);
+        }
+    }
 
     @Override
     public boolean isPlaying() {
@@ -119,7 +127,7 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
             player.pause();
 
             //回调监听器
-            publishPlayingStatus();
+            publishPausedStatus();
         }
     }
 
@@ -132,5 +140,17 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
             //回调监听器
             publishPlayingStatus();
         }
+    }
+
+    @Override
+    public void addMusicPlayerListener(MusicPlayerListener listener) {
+        if(!listeners.contains(listener)){
+            listeners.add(listener);
+        }
+    }
+
+    @Override
+    public void removeMusicPlayerListener(MusicPlayerListener listener) {
+        listeners.remove(listener);
     }
 }

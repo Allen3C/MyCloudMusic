@@ -1,6 +1,8 @@
 package com.example.mycloudmusic.manager;
 
+import com.example.mycloudmusic.activity.SimplePlayerActivity;
 import com.example.mycloudmusic.domain.Song;
+import com.example.mycloudmusic.listener.MusicPlayerListener;
 
 /**
  * 音乐播放器对外暴露的接口
@@ -28,4 +30,16 @@ public interface MusicPlayerManager {
      *继续播放
      */
     void resume();
+
+    /**
+     * 添加播放监听器
+     * @param listener
+     */
+    void addMusicPlayerListener(MusicPlayerListener listener);
+
+    /**
+     * 移除播放监听器
+     * @param listener
+     */
+    void removeMusicPlayerListener(MusicPlayerListener listener);
 }
