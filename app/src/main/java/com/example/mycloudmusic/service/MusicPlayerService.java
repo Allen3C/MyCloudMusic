@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 
+import com.example.mycloudmusic.manager.ListManager;
 import com.example.mycloudmusic.manager.MusicPlayerManager;
+import com.example.mycloudmusic.manager.impl.ListManagerlmpl;
 import com.example.mycloudmusic.manager.impl.MusicPlayerManagerImpl;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.NotificationUtil;
@@ -38,9 +40,22 @@ public class MusicPlayerService extends Service {
      * @return
      */
     public static MusicPlayerManager getMusicPlayerManager(Context context) {
+        context = context.getApplicationContext();
         //尝试启动service
         ServiceUtil.startService(context,MusicPlayerService.class);
         return MusicPlayerManagerImpl.getInstance(context);
+    }
+
+    /**
+     * 获取列表管理器
+     * @param context
+     * @return
+     */
+    public static ListManager getListManager(Context context){
+        context = context.getApplicationContext();
+        //尝试启动service
+        ServiceUtil.startService(context,MusicPlayerService.class);
+        return ListManagerlmpl.getInstance(context);
     }
 
     /**

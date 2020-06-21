@@ -32,9 +32,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.adapter.SongAdapter;
 import com.example.mycloudmusic.domain.Sheet;
+import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.domain.response.DetailResponse;
 import com.example.mycloudmusic.listener.HttpObserver;
+import com.example.mycloudmusic.manager.ListManager;
 import com.example.mycloudmusic.network.Api;
+import com.example.mycloudmusic.service.MusicPlayerService;
 import com.example.mycloudmusic.util.Constant;
 import com.example.mycloudmusic.util.ImageUtil;
 import com.example.mycloudmusic.util.LogUtil;
@@ -79,6 +82,7 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
     private LinearLayout ll_play_all_container;
     private TextView tv_count;
     private LinearLayout ll_user;
+    private ListManager listManager;
 
 
     @Override
@@ -154,6 +158,10 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
     @Override
     protected void initDatum() {
         super.initDatum();
+
+        //初始化列表管理器
+        listManager = MusicPlayerService.getListManager(getApplicationContext());
+
 //        //获取传递的参数
 //        id = getIntent().getStringExtra(Constant.ID);
         id = extraId();
@@ -186,10 +194,30 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                SimplePlayerActivity.start(getMainActivity());
+                //SimplePlayerActivity.start(getMainActivity());
+                play(position);
             }
         });
+    }
 
+    /**
+     * 播放当前位置音乐
+     * @param position
+     */
+    private void play(int position) {
+        //获取当前位置播放的音乐
+        Song data = adapter.getItem(position);
+
+        //把当前歌单所有音乐设置到播放列表
+        //有些应用
+        //可能会实现添加到已经播放列表功能
+        listManager.setDatum(adapter.getData());
+
+        //播放当前音乐
+        listManager.play(data);
+
+        //简单播放器界面
+        SimplePlayerActivity.start(getMainActivity());
     }
 
     private void fetchData() {
