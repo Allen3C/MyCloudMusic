@@ -48,4 +48,10 @@ public interface MusicPlayerManager {
      * @return
      */
     Song getData();
+
+    /**
+     * 从指定位置播放
+     * @param progress
+     */
+    void seekTo(int progress);
 }

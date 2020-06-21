@@ -236,6 +236,11 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
         return data;
     }
 
+    @Override
+    public void seekTo(int progress) {
+        player.seekTo(progress);
+    }
+
     /**
      * 启动播放进度通知
      */

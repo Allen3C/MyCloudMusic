@@ -220,17 +220,10 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         LogUtil.d(TAG, "onProgressChanged");
 
-//        if (fromUser) {
-//            //if (seekBar.getId() == R.id.sb_volume) {
-//            //    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
-//            //} else {
-//            musicPlayerManager.seekTo(progress);
-//            if (!musicPlayerManager.isPlaying()) {
-//                musicPlayerManager.resume();
-//            }
-//            //}
-//
-//        }
+        if (fromUser) {
+            //跳转到该位置播放
+            musicPlayerManager.seekTo(progress);
+        }
     }
 
     /**
