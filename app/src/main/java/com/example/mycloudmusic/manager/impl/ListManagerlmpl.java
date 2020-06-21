@@ -4,7 +4,10 @@ import android.content.Context;
 
 import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.manager.ListManager;
+import com.example.mycloudmusic.manager.MusicPlayerManager;
+import com.example.mycloudmusic.service.MusicPlayerService;
 import com.example.mycloudmusic.util.LogUtil;
+import com.example.mycloudmusic.util.ResourceUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,9 +26,19 @@ public class ListManagerlmpl implements ListManager {
      */
     private List<Song> datum = new LinkedList<>();
 
+    /**
+     * 当前音乐对象
+     */
+    private Song data;
+    private final MusicPlayerManager musicPlayerManager;
+
     private ListManagerlmpl(Context context) {
         this.context = context.getApplicationContext();
+
+        //初始化音乐播放管理器
+        musicPlayerManager = MusicPlayerService.getMusicPlayerManager(this.context);
     }
+
 
     /**
      * 获取单例对象
@@ -44,6 +57,11 @@ public class ListManagerlmpl implements ListManager {
     @Override
     public void setDatum(List<Song> datum) {
         LogUtil.d(TAG,"setDatum");
+        //清空原来的数据
+        this.datum.clear();
+
+        //添加新的数据
+        this.datum.addAll(datum);
     }
 
     @Override
@@ -55,6 +73,11 @@ public class ListManagerlmpl implements ListManager {
     @Override
     public void play(Song data) {
         LogUtil.d(TAG,"play");
+        //保存数据
+        this.data = data;
+
+        //播放音乐
+        musicPlayerManager.play(ResourceUtil.resourceUri(data.getUri()), data);
     }
 
     @Override

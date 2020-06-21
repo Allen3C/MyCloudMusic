@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mycloudmusic.R;
 import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.listener.MusicPlayerListener;
+import com.example.mycloudmusic.manager.ListManager;
 import com.example.mycloudmusic.manager.MusicPlayerManager;
 import com.example.mycloudmusic.service.MusicPlayerService;
 import com.example.mycloudmusic.util.LogUtil;
@@ -72,6 +73,7 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     @BindView(R.id.bt_loop_model)
     Button bt_loop_model;
     private MusicPlayerManager musicPlayerManager;
+    private ListManager listManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,18 +89,22 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
 //        MusicPlayerManager o2 = MusicPlayerService.getMusicPlayerManager(getMainActivity());
 //        LogUtil.d(TAG, "" + (o1 == o2));
 
+        //初始化列表管理器
+        listManager = MusicPlayerService.getListManager(getApplicationContext());
         //获取播放管理器
-        musicPlayerManager = MusicPlayerService.getMusicPlayerManager(getMainActivity());
+        musicPlayerManager = MusicPlayerService.getMusicPlayerManager(getApplicationContext());
 
-        //测试音乐播放
-        //由于现在没有获取数据
-        //所以创建一个测试数据
-        String songUrl = "http://dev-courses-misuc.ixuea.com/assets/s1.mp3";
+//        //测试音乐播放
+//        //由于现在没有获取数据
+//        //所以创建一个测试数据
+//        String songUrl = "http://dev-courses-misuc.ixuea.com/assets/s1.mp3";
+//
+//        Song song=new Song();
+//        song.setUri(songUrl);
+//
+//        musicPlayerManager.play(songUrl, song);
 
-        Song song=new Song();
-        song.setUri(songUrl);
 
-        musicPlayerManager.play(songUrl, song);
 
 
     }
@@ -173,9 +179,9 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
      */
     private void playOrPause() {
         if (musicPlayerManager.isPlaying()) {
-            musicPlayerManager.pause();
+            listManager.pause();
         } else {
-            musicPlayerManager.resume();
+            listManager.resume();
         }
     }
 
