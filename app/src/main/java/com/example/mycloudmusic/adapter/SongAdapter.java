@@ -35,6 +35,8 @@ public class SongAdapter extends BaseQuickAdapter<Song, BaseViewHolder> {
 
         //显示信息
         helper.setText(R.id.tv_info, data.getSinger().getNickname());
+
+
     }
 
 }
