@@ -86,4 +86,19 @@ public class Constant {
      * 音乐通知进度回调间隔16ms
      */
     public static final long DEFAULT_TIME = 16;
+
+    /**
+     * 列表循环
+     */
+    public static final int MODEL_LOOP_LIST = 0;
+
+    /**
+     * 单曲循环
+     */
+    public static final int MODEL_LOOP_ONE = 1;
+
+    /**
+     * 随机循环
+     */
+    public static final int MODEL_LOOP_RANDOM = 2;
 }
