@@ -22,9 +22,13 @@ import com.example.mycloudmusic.service.MusicPlayerService;
 import com.example.mycloudmusic.util.LogUtil;
 import com.example.mycloudmusic.util.NotificationUtil;
 import com.example.mycloudmusic.util.TimeUtil;
+import com.example.mycloudmusic.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.example.mycloudmusic.util.Constant.MODEL_LOOP_LIST;
+import static com.example.mycloudmusic.util.Constant.MODEL_LOOP_RANDOM;
 
 /**
  * 简单播放器实现
@@ -153,6 +157,7 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     @OnClick(R.id.bt_previous)
     public void onPreviousClick() {
         LogUtil.d(TAG, "onPreviousClick");
+        listManager.play(listManager.previous());
     }
 
     /**
@@ -192,6 +197,17 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     public void onNextClick() {
         LogUtil.d(TAG, "onNextClick");
 
+        //获取下一首音乐
+        Song data = listManager.next();
+
+        if (data != null) {
+            listManager.play(data);
+        } else {
+            //正常情况下不能能走到这里
+            //因为播放界面只有播放列表有数据时才能进入
+            ToastUtil.errorShortToast(R.string.not_play_music);
+        }
+
     }
 
     /**
@@ -200,6 +216,34 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     @OnClick(R.id.bt_loop_model)
     public void onLoopModelClick() {
         LogUtil.d(TAG, "onLoopModelClick");
+
+        //改变循环模式
+        listManager.changeLoopModel();
+
+        //显示循环模式
+        showLoopModel();
+    }
+
+    /**
+     * 显示循环模式
+     */
+    private void showLoopModel() {
+        //获取当前循环模式
+        int model = listManager.getLoopModel();
+
+        //根据不同循环模式
+        //显示不同的提示
+        switch (model) {
+            case MODEL_LOOP_LIST:
+                bt_loop_model.setText("列表循环");
+                break;
+            case MODEL_LOOP_RANDOM:
+                bt_loop_model.setText("随机模式");
+                break;
+            default:
+                bt_loop_model.setText("单曲循环");
+                break;
+        }
     }
 
     /**

@@ -83,4 +83,6 @@
     <string name="search">搜索</string>
     <string name="sort">排序</string>
     <string name="report">举报</string>
+    <!--简单播放界面-->
+    <string name="not_play_music">没有可播放音乐!</string>
 </resources>
