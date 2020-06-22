@@ -742,6 +742,9 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
         if (listManager.getDatum() != null && listManager.getDatum().size() > 0) {
             //有音乐
 
+            //显示迷你控制器
+            ll_play_control_small.setVisibility(View.VISIBLE);
+
             //获取当前播放的音乐
             Song data = listManager.getData();
 
@@ -758,6 +761,9 @@ public class SheetDetailActivity extends BaseTitleActivity implements View.OnCli
                 //显示播放状态
                 showMusicPlayStatus();
             }
+        }else{
+            //隐藏迷你控制器
+            ll_play_control_small.setVisibility(View.GONE);
         }
     }
 
