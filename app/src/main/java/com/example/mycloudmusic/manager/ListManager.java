@@ -62,4 +62,10 @@ public interface ListManager {
      * @return
      */
     int getLoopModel();
+
+    /**
+     * 获取当前播放的音乐
+     * @return
+     */
+    Song getData();
 }

@@ -1,8 +1,10 @@
 package com.example.mycloudmusic.manager.impl;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 
 import com.example.mycloudmusic.domain.Song;
+import com.example.mycloudmusic.listener.MusicPlayerListener;
 import com.example.mycloudmusic.manager.ListManager;
 import com.example.mycloudmusic.manager.MusicPlayerManager;
 import com.example.mycloudmusic.service.MusicPlayerService;
@@ -20,7 +22,7 @@ import static com.example.mycloudmusic.util.Constant.MODEL_LOOP_RANDOM;
 /**
  * 列表接口默认实现类
  */
-public class ListManagerlmpl implements ListManager {
+public class ListManagerlmpl implements ListManager, MusicPlayerListener {
 
     private static final String TAG = "ListManagerlmpl";
     private static ListManagerlmpl instance;
@@ -47,6 +49,9 @@ public class ListManagerlmpl implements ListManager {
 
         //初始化音乐播放管理器
         musicPlayerManager = MusicPlayerService.getMusicPlayerManager(this.context);
+
+        //添加音乐监听器
+        musicPlayerManager.addMusicPlayerListener(this);
     }
 
 
@@ -238,4 +243,58 @@ public class ListManagerlmpl implements ListManager {
     public int getLoopModel() {
         return model;
     }
+
+    @Override
+    public Song getData() {
+        return data;
+    }
+
+    //音乐播放管理器接口
+    @Override
+    public void onPaused(Song data) {
+
+    }
+
+    @Override
+    public void onPlaying(Song data) {
+
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp, Song data) {
+
+    }
+
+    @Override
+    public void onProgress(Song data) {
+
+    }
+
+    /**
+     * 播放完毕了回调
+     *
+     * @param mp
+     */
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        if (MODEL_LOOP_ONE == getLoopModel()) {
+            //如果是单曲循环
+            //就不会处理了
+            //因为我们使用了MediaPlayer的循环模式
+
+            //如果使用的第三方框架
+            //如果没有循环模式
+            //那就要在这里继续播放当前音乐
+
+        } else {
+            //其他模式
+
+            //播放下一首音乐
+            Song data = next();
+            if (data != null) {
+                play(data);
+            }
+        }
+    }
+    //end 音乐播放管理器接口
 }
