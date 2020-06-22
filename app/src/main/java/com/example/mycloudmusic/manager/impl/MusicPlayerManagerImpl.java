@@ -28,7 +28,7 @@ import static com.example.mycloudmusic.util.Constant.MESSAGE_PROGRESS;
 /**
  * 播放管理器默认实现
  */
-public class MusicPlayerManagerImpl implements MusicPlayerManager {
+public class MusicPlayerManagerImpl implements MusicPlayerManager, MediaPlayer.OnCompletionListener {
 
 
     /**
@@ -99,6 +99,9 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
                 ListUtil.eachListener(listeners, listener->listener.onPrepared(mediaPlayer,data));
             }
         });
+
+        //设置播放完毕监听器
+        player.setOnCompletionListener(this);
     }
 
     /**
@@ -343,4 +346,14 @@ public class MusicPlayerManagerImpl implements MusicPlayerManager {
             }
         }
     };
+
+    /**
+     * 音乐播放完毕了监听器
+     * @param mp
+     */
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        //回调完成监听器
+        ListUtil.eachListener(listeners, listener->listener.onCompletion(mp));
+    }
 }
