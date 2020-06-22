@@ -11,9 +11,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycloudmusic.R;
+import com.example.mycloudmusic.adapter.SimplePlayerAdapter;
 import com.example.mycloudmusic.domain.Song;
 import com.example.mycloudmusic.listener.MusicPlayerListener;
 import com.example.mycloudmusic.manager.ListManager;
@@ -78,11 +80,23 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
     Button bt_loop_model;
     private MusicPlayerManager musicPlayerManager;
     private ListManager listManager;
+    private SimplePlayerAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_player);
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        //高度固定
+        rv.setHasFixedSize(true);
+
+        //布局管理器
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getMainActivity());
+        rv.setLayoutManager(layoutManager);
     }
 
     @Override
@@ -108,9 +122,15 @@ public class SimplePlayerActivity extends BaseTitleActivity implements SeekBar.O
 //
 //        musicPlayerManager.play(songUrl, song);
 
+        super.initDatum();
+        //创建适配器
+        adapter = new SimplePlayerAdapter(android.R.layout.simple_list_item_1);
 
+        //设置到控件
+        rv.setAdapter(adapter);
 
-
+        //设置数据
+        adapter.replaceData(listManager.getDatum());
     }
 
     @Override
