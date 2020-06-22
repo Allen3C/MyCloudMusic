@@ -20,6 +20,8 @@
             android:layout_weight="1"
             android:layout_height="0dp"></androidx.recyclerview.widget.RecyclerView>
 
+        <!--包含迷你播放控制器-->
+        <include layout="@layout/play_controll_small"/>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
